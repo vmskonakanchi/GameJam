@@ -13,12 +13,13 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        sp = GetComponent<SpriteRenderer>();
     }
 
     void FixedUpdate()
     {
         Move();
-        Shoot();
+        Jump();
     }
     void Update()
     {
