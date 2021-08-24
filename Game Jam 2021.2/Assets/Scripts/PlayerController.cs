@@ -5,6 +5,12 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    enum AmmoType
+    {
+        Normal,
+        Fire,
+        Water
+    }
     Rigidbody2D rb;
     SpriteRenderer sp;
     public GameObject bulletPrefab;
@@ -36,9 +42,10 @@ public class PlayerController : MonoBehaviour
         //play shoot animation
         if(Input.GetMouseButtonDown(0))
         {
-            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            GameObject newbullet = Instantiate(bulletPrefab , playerbulletFirePoint.position , transform.rotation);
-            newbullet.GetComponent<Rigidbody2D>().velocity =  mousePos * Vector2.right * transform.rotation *  launchForce;
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(playerbulletFirePoint.position);
+            Vector3 direction = (Input.mousePosition - mousePos).normalized;
+            GameObject newbullet = Instantiate(bulletPrefab , playerbulletFirePoint.position , Quaternion.identity);
+            newbullet.GetComponent<Rigidbody2D>().velocity = new Vector2(direction.x, direction.y) * launchForce;
         }
         
     }
