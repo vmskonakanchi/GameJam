@@ -16,13 +16,7 @@ using UnityEngine;
       
      void Update()
      {
-           
-     }
-
-
-    void FixedUpdate()
-    {
-        if(Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
             RecordTime();
         }
@@ -32,28 +26,42 @@ using UnityEngine;
         }
     }
 
+
+    void FixedUpdate()
+    {
+        
+    }
+
     void RecordTime()
     {
-        if(rotation.Count > Mathf.RoundToInt (5f/Time.fixedDeltaTime) && rotation.Count > Mathf.RoundToInt (5f / Time.fixedDeltaTime))
-;       {
-            position.RemoveAt(position.Count - 1);
-            rotation.RemoveAt(rotation.Count - 1);
-        }
         position.Insert(0, transform.position);
         rotation.Insert(0, transform.rotation);
+        if (position.Count > Mathf.RoundToInt(5f / Time.fixedDeltaTime))
+        {
+            position.RemoveAt(position.Count - 1);
+        }
+        else if (rotation.Count > Mathf.RoundToInt(5f / Time.fixedDeltaTime))
+        {
+            rotation.RemoveAt(rotation.Count - 1);
+        }
     }
 
     void Rewindtime()
     {
-        if(rotation.Count > 0 && rotation.Count > 0)
+        if (rotation.Count > 0)
         {
             transform.position = position[0];
             position.RemoveAt(0);
+        }
+        else if (rotation.Count > 0)
+        {
             transform.rotation = rotation[0];
             rotation.RemoveAt(0);
         }
-    }
-    
-
-
+    }  
 }
+
+
+ 
+
+

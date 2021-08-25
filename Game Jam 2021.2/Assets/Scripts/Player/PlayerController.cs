@@ -4,6 +4,8 @@ public class PlayerController : MonoBehaviour
 {
     Rigidbody2D rb;
     SpriteRenderer sp;
+    Animator am;
+    Gravitygun gravitygun;
     public GameObject bulletPrefab;
     public Transform playerbulletFirePoint;
     public Transform groundCheckPoint;
@@ -13,14 +15,18 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float launchForce;
     [SerializeField] bool isOnGround;
     [SerializeField] float groundHitRadius;
+    // bool isGravitygunon = false;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         sp = GetComponent<SpriteRenderer>();
+        am = GetComponent<Animator>();
+        gravitygun = gameObject.GetComponent <Gravitygun>();
     }
     void Update()
     {
+        gravitygun.HitWithRay();
         Move();
         ChecKGround();
         Jump();
@@ -50,6 +56,8 @@ public class PlayerController : MonoBehaviour
         //play move animation
         //play sound 
         //play particls if any
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        playerbulletFirePoint.rotation = transform.rotation;
         if(Input.GetKey(KeyCode.A))
         {
             rb.AddForce (Vector2.left * moveSpeed * Time.deltaTime);
@@ -81,7 +89,7 @@ public class PlayerController : MonoBehaviour
         //play particls if any
         if (Input.GetKeyDown(KeyCode.Space) && isOnGround == true)
         {
-            rb.AddForce (jumpSpeed * Time.deltaTime * Vector2.up);
+            rb.AddForce (jumpSpeed * Time.deltaTime * Vector2.up, ForceMode2D.Force);
         }
         else
         {
