@@ -79,6 +79,7 @@ public class SuitGuyAI : MonoBehaviour
 
     private void FixedUpdate()
     {
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         float playerDistanceX = Mathf.Abs(player.position.x - transform.position.x);
         float playerDistanceY = Mathf.Abs(player.position.y - transform.position.y);
 
@@ -140,8 +141,6 @@ public class SuitGuyAI : MonoBehaviour
         }
 
         // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-        Debug.Log(targetPosition - transform.position.x);
-        Debug.Log(player.position.x - transform.position.x);
         // When chasing
         if (chase_State)
         {
@@ -186,7 +185,6 @@ public class SuitGuyAI : MonoBehaviour
 
         // Stop movement when close to target position to avoid gittering
         if (Mathf.Abs(targetPosition - transform.position.x) < 0.1f) rb.velocity = new Vector2(0, rb.velocity.y);
-        Debug.Log(targetPosition);
     }
 
     // Groundcheck from EnemyAI_GC script

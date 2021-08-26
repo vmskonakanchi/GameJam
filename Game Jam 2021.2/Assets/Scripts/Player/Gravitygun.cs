@@ -3,53 +3,48 @@ using UnityEngine;
 public class Gravitygun : MonoBehaviour
 {
     PlayerController player;
-    public LineRenderer ray;
-    [SerializeField] float pullingForce;
-    
-   
+    [SerializeField] float raycastDist;
+    RaycastHit2D hit2d;
+    Vector3 mousePos;
+    Vector3 correctpos;
+
+
+
     void Start()
     {
-        player = gameObject.GetComponent<PlayerController>();      
-      
+        player = gameObject.GetComponent<PlayerController>();
+
     }
     void Update()
     {
-        
-        ShowRay();
-        
+
+
     }
-    void ShowRay()
-    {
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        if (Input.GetMouseButtonDown(1))
-        {
-            ray.enabled = true;
-        }
-        else if (Input.GetMouseButton(1))
-        {
-            ray.SetPosition(0 , player.playerbulletFirePoint.position);
-            ray.SetPosition(1 , mousePos);
-        }
-        if(Input.GetMouseButtonUp(1))
-        {
-            ray.enabled = false;
-        }
-    }
+
     public void HitWithRay()
     {
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        correctpos = (mousePos - player.playerbulletFirePoint.position).normalized;
         if (Input.GetMouseButton(1))
         {
-            RaycastHit2D hit2d = Physics2D.Raycast(player.playerbulletFirePoint.position, mousePos , 10f);
-            if (hit2d.collider == null)
-                return;
-            else
+         
+
+            hit2d = Physics2D.Raycast(player.playerbulletFirePoint.position, correctpos, raycastDist);
+
+            if (hit2d.rigidbody.gameObject.tag != "Player")
             {
-                Vector2 velocityDirX = this.transform.position - hit2d.transform.position;
-                hit2d.rigidbody.AddForce (velocityDirX * pullingForce);
-            }  
-            Debug.Log(hit2d.transform.gameObject.tag);
+                hit2d.rigidbody.gravityScale = -1;
+            }
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                if (hit2d.rigidbody.gameObject.tag != "Player")
+                {
+                    hit2d.rigidbody.gravityScale = 1;
+                }
+            }
+
         }
-            //Debug.DrawRay(player.playerbulletFirePoint.position, mousePos , Color.white);
+
+        Debug.DrawRay(player.playerbulletFirePoint.position, correctpos, Color.green);
     }
 }

@@ -70,7 +70,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 320129050c13a5041a628843afeb1dfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  suitGuyAIScript: {fileID: 0}
+  suitGuyAIScript: {fileID: 2769923134857295964}
 --- !u!1 &2769923134857295939
 GameObject:
   m_ObjectHideFlags: 0
@@ -81,14 +81,13 @@ GameObject:
   m_Component:
   - component: {fileID: 2769923134857295966}
   - component: {fileID: 2769923134857295937}
-  - component: {fileID: 498338621247126937}
+  - component: {fileID: 3164423172304433448}
   - component: {fileID: 2769923134857295936}
-  - component: {fileID: 2769923134857295967}
+  - component: {fileID: 7470881381010729362}
   - component: {fileID: 2769923134857295964}
-  - component: {fileID: 309000506}
   m_Layer: 0
   m_Name: Suit Guy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -102,7 +101,7 @@ Transform:
   m_GameObject: {fileID: 2769923134857295939}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.65, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.3313, y: 1.3313, z: 1.3313}
   m_Children:
   - {fileID: 2769923134445321316}
   m_Father: {fileID: 0}
@@ -159,7 +158,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &498338621247126937
+--- !u!95 &3164423172304433448
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0
@@ -191,7 +190,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.03, y: -0.0046491623}
+  m_Offset: {x: -0.056779623, y: 0.0042773485}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -202,9 +201,9 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.63802487, y: 1.5510473}
+  m_Size: {x: 0.7748983, y: 1.5689003}
   m_EdgeRadius: 0
---- !u!50 &2769923134857295967
+--- !u!50 &7470881381010729362
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -217,14 +216,14 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 3
+  m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 8
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 0
 --- !u!114 &2769923134857295964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,17 +239,4 @@ MonoBehaviour:
   chase_Range: {x: 8, y: 4}
   shooting_Range: {x: 4, y: 2}
   shootingInterval: 1
-  speed: 7
---- !u!114 &309000506
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2769923134857295939}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 320129050c13a5041a628843afeb1dfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  suitGuyAIScript: {fileID: 2769923134857295964}
+  speed: 5
