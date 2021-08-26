@@ -48,6 +48,11 @@ public class SuitGuyAI : MonoBehaviour
 
     private void Update()
     {
+        PlayAnimations();
+    }
+
+    private void PlayAnimations()
+    {
         // If not in shooting state, plsy animations
         if (!shooting_State)
         {
