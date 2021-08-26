@@ -14,8 +14,11 @@ public class SuitGuyAI : MonoBehaviour
 {
     private Transform player;
     private Rigidbody2D rb;
-    private SpriteRenderer sr;
     private Animator anim;
+
+    [SerializeField] private Transform firePoint;
+    [SerializeField] private GameObject bullet;
+    [SerializeField] private GameObject muzzleFlash;
 
     public Vector2 chase_Range;
     public Vector2 shooting_Range;
@@ -26,8 +29,10 @@ public class SuitGuyAI : MonoBehaviour
     private bool canShoot = true;
     private bool isShooting = false;
 
+    public float bulletSpeed;
     public float speed;
     private bool isGrounded = true;
+    private bool canMove = true;
 
     private float targetPosition;
     private int movingDirection;
@@ -40,18 +45,12 @@ public class SuitGuyAI : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
 
         rb = GetComponent<Rigidbody2D>();
-        sr = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
 
         targetPosition = transform.position.x;
     }
 
     private void Update()
-    {
-        PlayAnimations();
-    }
-
-    private void PlayAnimations()
     {
         // If not in shooting state, plsy animations
         if (!shooting_State)
@@ -79,7 +78,6 @@ public class SuitGuyAI : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         float playerDistanceX = Mathf.Abs(player.position.x - transform.position.x);
         float playerDistanceY = Mathf.Abs(player.position.y - transform.position.y);
 
@@ -115,6 +113,7 @@ public class SuitGuyAI : MonoBehaviour
             {
                 chase_State = true;
                 shooting_State = false;
+                canMove = false;
             }
             Debug.Log("Not Spotted");
         }
@@ -136,11 +135,13 @@ public class SuitGuyAI : MonoBehaviour
             if (canShoot)
             {
                 canShoot = false;
+                isShooting = true;
                 StartCoroutine(Shoot());
             }
         }
 
         // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
         // When chasing
         if (chase_State)
         {
@@ -148,12 +149,12 @@ public class SuitGuyAI : MonoBehaviour
             if (targetPosition - transform.position.x > 0)
             {
                 movingDirection = 1;
-                sr.flipX = false;
+                transform.rotation = Quaternion.Euler(0, 0, 0);
             }
             else if (targetPosition - transform.position.x < 0)
             {
                 movingDirection = -1;
-                sr.flipX = true;
+                transform.rotation = Quaternion.Euler(0, 180, 0);
             }
         }
         // When shooting
@@ -163,24 +164,29 @@ public class SuitGuyAI : MonoBehaviour
             if (player.position.x - transform.position.x > 0)
             {
                 movingDirection = 1;
-                sr.flipX = false;
+                transform.rotation = Quaternion.Euler(0, 0, 0);
             }
             else if (player.position.x - transform.position.x < 0)
             {
                 movingDirection = -1;
-                sr.flipX = true;
+                transform.rotation = Quaternion.Euler(0, 180, 0);
             }
         }
 
         // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-        if (!shooting_State)
+        if (!shooting_State && canMove)
         {
             // Move enemy on the X axis in direction to the last spot the player was seen, only if grounded
             if (isGrounded)
             {
                 rb.velocity = new Vector2(speed * movingDirection, rb.velocity.y);
             }
+        }
+        else if (!canMove)
+        {
+            rb.velocity = Vector2.zero;
+            canMove = true;
         }
 
         // Stop movement when close to target position to avoid gittering
@@ -200,9 +206,15 @@ public class SuitGuyAI : MonoBehaviour
     // Coroutine with shoot code
     private IEnumerator Shoot()
     {
+        yield return new WaitForSeconds(0.36f);
         anim.Play("Enemy Shooting");
         Debug.Log("Shoot");
-        yield return new WaitForSeconds(shootingInterval);
+        GameObject b = Instantiate(bullet, firePoint.position, Quaternion.identity);
+        GameObject mf = Instantiate(muzzleFlash, firePoint);
+        b.transform.GetComponent<Rigidbody2D>().velocity = new Vector2(bulletSpeed * movingDirection, 0);
+        Destroy(mf, 0.1f);
+        isShooting = false;
+        yield return new WaitForSeconds(shootingInterval - 0.36f);
         canShoot = true;
     }
 }
