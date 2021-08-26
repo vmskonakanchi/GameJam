@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour
     {
 
         //play sound 
-        //play particls if any
+        //play particles if any
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         if (Input.GetKey(KeyCode.A))
         {
@@ -117,6 +117,10 @@ public class PlayerController : MonoBehaviour
         {
             am.SetTrigger("Jump");
         }
+    }
+    public void BulletDamage()
+    {
+        Debug.Log("Hit with bullet by enemy");
     }
 
 

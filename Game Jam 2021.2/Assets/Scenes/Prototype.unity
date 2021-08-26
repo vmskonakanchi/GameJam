@@ -692,10 +692,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lorenz
       objectReference: {fileID: 0}
-    - target: {fileID: 8203799798451781661, guid: 05c303f24818a7241819e75f40c146cc, type: 3}
-      propertyPath: m_Mass
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 05c303f24818a7241819e75f40c146cc, type: 3}
 --- !u!1 &1249656363
