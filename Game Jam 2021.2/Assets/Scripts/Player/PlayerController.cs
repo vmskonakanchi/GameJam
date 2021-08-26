@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -6,6 +7,7 @@ public class PlayerController : MonoBehaviour
     Animator am;
     Gravitygun gravitygun;
     [Header("Components Required")]
+    public BoxCollider2D groundCheck;
     public GameObject bulletPrefab;
     public Transform playerbulletFirePoint;
     public Transform groundCheckPoint;
@@ -26,14 +28,14 @@ public class PlayerController : MonoBehaviour
     }
     void FixedUpdate()
     {
-        Jump();
-        Move();
         gravitygun.HitWithRay();
-        ChecKGround();
+        //CheckGround();
         Shoot();
     }
     void Update()
     {
+        Jump();
+        Move();
         PlayAnimations();
     }
     void Shoot()
@@ -56,26 +58,29 @@ public class PlayerController : MonoBehaviour
 
     void Move()
     {
-
         //play sound 
-        //play particls if any
+        //play particles if any
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         if (Input.GetKey(KeyCode.A))
         {
             am.SetFloat("Speed", 2);
-            rb.velocity = moveSpeed * Time.deltaTime * Vector2.left;
+            rb.velocity = new Vector2(moveSpeed * -1, rb.velocity.y);
             transform.eulerAngles = new Vector2(0, 180);
         }
         else if (Input.GetKey(KeyCode.D))
         {
             am.SetFloat("Speed", 2);
-            rb.velocity = moveSpeed * Time.deltaTime * Vector2.right;
+            rb.velocity = new Vector2(moveSpeed * 1, rb.velocity.y);
             transform.eulerAngles = new Vector2(0, 0);
         }
-        else am.SetFloat("Speed", 1);
+        else
+        {
+            am.SetFloat("Speed", 1);
+            rb.velocity = new Vector2(0, rb.velocity.y);
+        }
     }
 
-    void ChecKGround()
+    /*void CheckGround()
     {
         Collider2D groundHit = Physics2D.OverlapCircle(groundCheckPoint.position, groundHitRadius);
         if (groundHit == true)
@@ -87,19 +92,18 @@ public class PlayerController : MonoBehaviour
             
             isOnGround = false;
         }
-    }
+
+    }*/
     void Jump()
     {
         //play jump sound
-        //play particls if any
+        //play particles if any
         if (Input.GetKeyDown(KeyCode.Space) && isOnGround == true)
         {
             isOnGround = false;
-            rb.velocity = jumpSpeed * Time.deltaTime * Vector2.up;
-        }
-        else
-        {
-            return;
+            rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
+            groundCheck.enabled = false;
+            StartCoroutine(GroundCheckEnable());
         }
 
     }
@@ -119,8 +123,27 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void GroundCheck()
+    {
+        isOnGround = true;
+    }
+    public void GroundUncheck()
+    {
+        isOnGround = false;
+    }
 
-    void OnDrawGizmosSelected()
+    public void BulletDamage()
+    {
+        Debug.Log("Player hit");
+    }
+
+    IEnumerator GroundCheckEnable()
+    {
+        yield return new WaitForSeconds(0.2f);
+        groundCheck.enabled = true;
+    }
+
+        void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireSphere(groundCheckPoint.position, groundHitRadius);
     }

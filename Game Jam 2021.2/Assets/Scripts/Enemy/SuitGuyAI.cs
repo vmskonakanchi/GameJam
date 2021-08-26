@@ -84,7 +84,7 @@ public class SuitGuyAI : MonoBehaviour
         // Change States, but only when not in middle of shooting
         if (!isShooting)
         {
-            if (playerDistanceX < chase_Range.x && playerDistanceX > shooting_Range.x && playerDistanceY < chase_Range.y || playerDistanceY > shooting_Range.y)
+            if (playerDistanceX < chase_Range.x && playerDistanceX > shooting_Range.x && (playerDistanceY < chase_Range.y || playerDistanceY > shooting_Range.y))
             {
                 chase_State = true;
                 shooting_State = false;
