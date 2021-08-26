@@ -26,9 +26,9 @@ public class PlayerController : MonoBehaviour
     }
     void FixedUpdate()
     {
+        Jump();
         Move();
         gravitygun.HitWithRay();
-        Jump();
         ChecKGround();
         Shoot();
     }
@@ -60,28 +60,31 @@ public class PlayerController : MonoBehaviour
         //play sound 
         //play particls if any
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-
         if (Input.GetKey(KeyCode.A))
         {
+            am.SetFloat("Speed", 2);
             rb.velocity = moveSpeed * Time.deltaTime * Vector2.left;
             transform.eulerAngles = new Vector2(0, 180);
         }
         else if (Input.GetKey(KeyCode.D))
         {
+            am.SetFloat("Speed", 2);
             rb.velocity = moveSpeed * Time.deltaTime * Vector2.right;
             transform.eulerAngles = new Vector2(0, 0);
         }
+        else am.SetFloat("Speed", 1);
     }
 
     void ChecKGround()
     {
         Collider2D groundHit = Physics2D.OverlapCircle(groundCheckPoint.position, groundHitRadius);
         if (groundHit == true)
-        {
+        {       
             isOnGround = true;
         }
         else if (groundHit == false)
         {
+            
             isOnGround = false;
         }
     }
@@ -91,6 +94,7 @@ public class PlayerController : MonoBehaviour
         //play particls if any
         if (Input.GetKeyDown(KeyCode.Space) && isOnGround == true)
         {
+            isOnGround = false;
             rb.velocity = jumpSpeed * Time.deltaTime * Vector2.up;
         }
         else
@@ -105,15 +109,11 @@ public class PlayerController : MonoBehaviour
         {
             am.SetFloat("Speed", 1);
         }
-        else if (rb.velocity.x > 0 && rb.velocity.y == 0)
+        else if (rb.velocity == Vector2.right || rb.velocity == Vector2.left)
         {
             am.SetFloat("Speed", 2);
         }
-        else if (rb.velocity.x < 0 && rb.velocity.y == 0)
-        {
-            am.SetFloat("Speed", 2);
-        }
-        else if (rb.velocity.y > 0)
+        else if (rb.velocity ==  Vector2.up)
         {
             am.SetTrigger("Jump");
         }
