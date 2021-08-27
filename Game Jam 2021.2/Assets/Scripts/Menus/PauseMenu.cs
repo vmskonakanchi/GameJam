@@ -10,6 +10,8 @@ public class PauseMenu : MonoBehaviour
 
     [SerializeField] string mainMenuSceneName;
 
+    bool isPaused = false;
+
 
     void Start()
     {
@@ -19,16 +21,20 @@ public class PauseMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            isPaused = !isPaused;
+
+        }
+
+        PauseScreen();
     }
 
-    public void Continue()
+    public void Play()
     {
 
-        //Make the Pause Menu disapear (depends on how it appears)
-        //Solution for now
-        pauseMenu.SetActive(false);
-        Time.timeScale = 1;
+        //Make the Pause Menu disapear
+        isPaused = false;
 
     }
 
@@ -36,7 +42,21 @@ public class PauseMenu : MonoBehaviour
     {
         //Set Game back to main
         SceneManager.LoadScene(mainMenuSceneName);
-        
+        isPaused = false;
 
+    }
+
+    void PauseScreen()
+    {
+        if(isPaused)
+        {
+            pauseMenu.SetActive(true);
+            Time.timeScale = 0;
+        }
+        else
+        {
+            pauseMenu.SetActive(false);
+            Time.timeScale = 1;
+        }
     }
 }
