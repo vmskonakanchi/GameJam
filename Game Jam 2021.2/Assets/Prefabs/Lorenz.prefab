@@ -124,7 +124,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 7494318182447787462, guid: fa9c6fb2b60d4a24892b8cde6cdaa8be, type: 3}
   playerbulletFirePoint: {fileID: 2384134269263713659}
   groundCheckPoint: {fileID: 2384134268643496138}
-  moveSpeed: 7
+  moveSpeed: 8
   jumpSpeed: 22
   launchForce: 10
   isOnGround: 0
@@ -157,7 +157,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 5
-  m_Material: {fileID: 6200000, guid: fd5f7de9dd243714f9a69fc8e6a4754a, type: 2}
+  m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
