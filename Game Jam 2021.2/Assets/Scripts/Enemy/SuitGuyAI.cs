@@ -58,7 +58,6 @@ public class SuitGuyAI : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(movingDirection);
         // If not in shooting state, plsy animations
         if (!shooting_State)
         {
