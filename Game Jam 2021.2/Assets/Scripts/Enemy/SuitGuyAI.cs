@@ -202,7 +202,7 @@ public class SuitGuyAI : MonoBehaviour
 
         // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-        if (!shooting_State && canMove)
+        if (!shooting_State && canMove && isGrounded)
         {
             // Move enemy on the X axis in direction to the last spot the player was seen, only if grounded
             if (isGrounded)

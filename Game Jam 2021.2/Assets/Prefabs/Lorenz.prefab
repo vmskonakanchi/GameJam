@@ -123,8 +123,8 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 5
-  m_Material: {fileID: 0}
+  m_GravityScale: 7
+  m_Material: {fileID: 6200000, guid: 75ae6490ef071a043ad12337c4ca50e3, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -142,7 +142,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.025753677, y: -0.005634308}
+  m_Offset: {x: -0.025753677, y: -0.0048833415}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -153,7 +153,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.13205001, y: 0.2918284}
+  m_Size: {x: 0.13205001, y: 0.29032648}
   m_EdgeRadius: 0
 --- !u!114 &492676452
 MonoBehaviour:
@@ -183,8 +183,8 @@ MonoBehaviour:
   bulletPrefab: {fileID: 7494318182447787462, guid: fa9c6fb2b60d4a24892b8cde6cdaa8be, type: 3}
   playerbulletFirePoint: {fileID: 2384134269263713659}
   groundCheckPoint: {fileID: 2384134268643496138}
-  moveSpeed: 200
-  jumpSpeed: 500
+  moveSpeed: 10
+  jumpSpeed: 24
   launchForce: 10
   isOnGround: 0
 --- !u!1 &2384134268643496139
@@ -232,7 +232,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.071334064, y: -0.021911355}
+  m_Offset: {x: 0.071334064, y: -0.033985086}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -243,7 +243,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.64708424, y: 0.040097956}
+  m_Size: {x: 0.64708424, y: 0.08829522}
   m_EdgeRadius: 0
 --- !u!114 &1435100924376440962
 MonoBehaviour:

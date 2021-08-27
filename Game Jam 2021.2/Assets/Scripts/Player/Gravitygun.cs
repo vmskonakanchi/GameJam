@@ -30,10 +30,12 @@ public class Gravitygun : MonoBehaviour
          
 
             hit2d = Physics2D.Raycast(player.playerbulletFirePoint.position, correctpos, raycastDist);
-
-            if (hit2d.rigidbody.gameObject.tag != "Player")
+            if (hit2d.rigidbody != null)
             {
-                hit2d.rigidbody.gravityScale = -1;
+                if (hit2d.rigidbody.gameObject.tag != "Player")
+                {
+                    hit2d.rigidbody.gravityScale = -1;
+                }
             }
             if (Input.GetKey(KeyCode.LeftShift))
             {

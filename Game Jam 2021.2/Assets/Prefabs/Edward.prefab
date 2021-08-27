@@ -153,8 +153,8 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_GravityScale: 7
+  m_Material: {fileID: 6200000, guid: 75ae6490ef071a043ad12337c4ca50e3, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -172,7 +172,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.055184282, y: 0}
+  m_Offset: {x: -0.03508699, y: -0.0046323314}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -183,7 +183,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.24561693, y: 0.32}
+  m_Size: {x: 0.15025789, y: 0.29064947}
   m_EdgeRadius: 0
 --- !u!114 &2864157611890962800
 MonoBehaviour:
@@ -200,8 +200,8 @@ MonoBehaviour:
   bulletPrefab: {fileID: 7494318182447787462, guid: fa9c6fb2b60d4a24892b8cde6cdaa8be, type: 3}
   playerbulletFirePoint: {fileID: 2864157610632835670}
   groundCheckPoint: {fileID: 2864157612602659924}
-  moveSpeed: 200
-  jumpSpeed: 500
+  moveSpeed: 10
+  jumpSpeed: 24
   launchForce: 10
   isOnGround: 0
 --- !u!114 &2864157611890962803
@@ -227,6 +227,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2864157612602659924}
   - component: {fileID: 2290385073950609917}
+  - component: {fileID: 2489515019294510425}
   m_Layer: 0
   m_Name: groundcheck
   m_TagString: Untagged
@@ -261,3 +262,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerController: {fileID: 2864157611890962800}
+--- !u!61 &2489515019294510425
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2864157612602659925}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.023740292, y: 0.20767766}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.8683804, y: 0.07581419}
+  m_EdgeRadius: 0
