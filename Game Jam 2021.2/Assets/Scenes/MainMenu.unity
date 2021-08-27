@@ -356,7 +356,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 556141588}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1771064358}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: Options
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &556141588
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -407,7 +419,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a33a622a9c9404745879b09536d7d93a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  highlightedSprite: {fileID: 0}
+  highlightedSprite: {fileID: 21300000, guid: e1adc9513f9552e4b8739de0f37dbe41, type: 3}
 --- !u!1 &786864526
 GameObject:
   m_ObjectHideFlags: 0
@@ -615,7 +627,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3804e432ae1c1234b9d5f5f26370e2c2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: bb9cf75ea0fb52e41808b270ab31ed18, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -799,7 +811,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1284294996}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1771064358}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: Quit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1284294996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -850,7 +874,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a33a622a9c9404745879b09536d7d93a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  highlightedSprite: {fileID: 0}
+  highlightedSprite: {fileID: 21300000, guid: e4d67cffd7b061146ae814da9c82fa42, type: 3}
 --- !u!1 &1771064356
 GameObject:
   m_ObjectHideFlags: 0
@@ -899,7 +923,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1771064356}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 550727144595740458e40b06b321012f, type: 3}
+  m_Script: {fileID: 11500000, guid: f891093d97fbf5144a3082f34693b25c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1781039132
@@ -1153,7 +1177,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2004810241}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1771064358}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2004810241
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1204,4 +1240,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a33a622a9c9404745879b09536d7d93a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  highlightedSprite: {fileID: 0}
+  highlightedSprite: {fileID: 21300000, guid: bb9cf75ea0fb52e41808b270ab31ed18, type: 3}

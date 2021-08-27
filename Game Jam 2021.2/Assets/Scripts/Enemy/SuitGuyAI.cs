@@ -7,8 +7,7 @@ using UnityEngine;
 // The enemy will go to the position where he last saw the Player, and he will only shoot if the Player is directly in front of him, and within a certain distance
 // There are 2 states: the Chase state and Shooting State
 
-// For the EnemyAI and EnemyAI_GC scripts to work, there needs to be a player with the tag "Player", and obstacles with the ninth layer which should be called "Obstacle"
-// Missing Jump/Falling Animation
+// For the SuitGuyAI and SuitGuyAI_GC scripts to work, there needs to be a player with the tag "Player", and obstacles with the ninth layer which should be called "Obstacle"
 
 public class SuitGuyAI : MonoBehaviour
 {
@@ -19,6 +18,7 @@ public class SuitGuyAI : MonoBehaviour
     [SerializeField] private Transform firePoint;
     [SerializeField] private GameObject bullet;
     [SerializeField] private GameObject muzzleFlash;
+    [SerializeField] private bool startFacingLeft;
 
     public Vector2 chase_Range;
     public Vector2 shooting_Range;
@@ -48,6 +48,12 @@ public class SuitGuyAI : MonoBehaviour
         anim = GetComponent<Animator>();
 
         targetPosition = transform.position.x;
+
+        if (startFacingLeft)
+        {
+            movingDirection = 1;
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
     }
 
     private void Update()
@@ -64,8 +70,7 @@ public class SuitGuyAI : MonoBehaviour
             // When Y movement is happening
             else if (rb.velocity.y != 0)
             {
-                // No animation for Jumping/Falling yet
-                anim.Play("Enemy Jump");
+                anim.Play("Enemy Falling");
             }
 
             // When X movement is happening
@@ -84,7 +89,7 @@ public class SuitGuyAI : MonoBehaviour
         // Change States, but only when not in middle of shooting
         if (!isShooting)
         {
-            if (playerDistanceX < chase_Range.x && playerDistanceX > shooting_Range.x && playerDistanceY < chase_Range.y || playerDistanceY > shooting_Range.y)
+            if (playerDistanceX < chase_Range.x && playerDistanceX > shooting_Range.x && (playerDistanceY < chase_Range.y || playerDistanceY > shooting_Range.y))
             {
                 chase_State = true;
                 shooting_State = false;
@@ -146,12 +151,23 @@ public class SuitGuyAI : MonoBehaviour
         if (chase_State)
         {
             // Define moving direction
-            if (targetPosition - transform.position.x > 0)
+            if (targetPosition - transform.position.x > 0 && !startFacingLeft)
             {
                 movingDirection = 1;
                 transform.rotation = Quaternion.Euler(0, 0, 0);
             }
-            else if (targetPosition - transform.position.x < 0)
+            else if (targetPosition - transform.position.x > 0 && startFacingLeft)
+            {
+                movingDirection = 1;
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+            }
+
+            else if (targetPosition - transform.position.x < 0 && !startFacingLeft)
+            {
+                movingDirection = -1;
+                transform.rotation = Quaternion.Euler(0, 180, 0);
+            }
+            else if (targetPosition - transform.position.x < 0 && startFacingLeft)
             {
                 movingDirection = -1;
                 transform.rotation = Quaternion.Euler(0, 180, 0);
@@ -166,7 +182,18 @@ public class SuitGuyAI : MonoBehaviour
                 movingDirection = 1;
                 transform.rotation = Quaternion.Euler(0, 0, 0);
             }
+            else if (player.position.x - transform.position.x > 0 && startFacingLeft)
+            {
+                movingDirection = 1;
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+            }
+
             else if (player.position.x - transform.position.x < 0)
+            {
+                movingDirection = -1;
+                transform.rotation = Quaternion.Euler(0, 180, 0);
+            }
+            else if (player.position.x - transform.position.x < 0 && startFacingLeft)
             {
                 movingDirection = -1;
                 transform.rotation = Quaternion.Euler(0, 180, 0);
