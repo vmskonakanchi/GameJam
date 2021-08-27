@@ -7,15 +7,14 @@ public class ButtonFunctions : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    Sprite normalSprite;
-    public Sprite highlightedSprite;
+    
+    public GameObject highlightedSprite;
 
-    Image childImage;
+    
 
     void Start()
     {
-        childImage = GetComponentInChildren<Image>();
-        normalSprite = childImage.sprite;
+        
     }
 
     // Update is called once per frame
@@ -26,11 +25,11 @@ public class ButtonFunctions : MonoBehaviour
 
     public void ButtonHighlight()
     {
-        childImage.sprite = highlightedSprite;
+        highlightedSprite.SetActive(true);
     }
 
     public void NormalButtonState()
     {
-        childImage.sprite = normalSprite;
+        highlightedSprite.SetActive(false);
     }
 }
