@@ -15,6 +15,7 @@ C:/Users/andre/OneDrive/Ambiente de Trabalho/Unity/GameJam/Game Jam 2021.2
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 49635
 Successfully changed project path to: C:/Users/andre/OneDrive/Ambiente de Trabalho/Unity/GameJam/Game Jam 2021.2
@@ -22,12 +23,17 @@ C:/Users/andre/OneDrive/Ambiente de Trabalho/Unity/GameJam/Game Jam 2021.2
 Using Asset Import Pipeline V2.
 Refreshing native plugins compatible for Editor in 41.63 ms, found 3 plugins.
 =======
+=======
+>>>>>>> Stashed changes
 55426
 Successfully changed project path to: C:/Users/samue_nlv6l7z/Documents/GameJam/Game Jam 2021.2
 C:/Users/samue_nlv6l7z/Documents/GameJam/Game Jam 2021.2
 Using Asset Import Pipeline V2.
 Refreshing native plugins compatible for Editor in 41.09 ms, found 3 plugins.
+<<<<<<< Updated upstream
 >>>>>>> 9a9f9e4ce1d7fa8afa626d86a2b838205e46d494
+=======
+>>>>>>> Stashed changes
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2020.3.14f1 (d0d1bb862f9d)
 [Subsystems] Discovering subsystems at path C:/Program Files/2020.3.14f1/Editor/Data/Resources/UnitySubsystems
@@ -65,10 +71,14 @@ Registering precompiled unity dll's ...
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2020.3.14f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2020.3.14f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
 Registered in 0.002011 seconds.
+<<<<<<< Updated upstream
 >>>>>>> 9a9f9e4ce1d7fa8afa626d86a2b838205e46d494
+=======
+>>>>>>> Stashed changes
 Native extension for WindowsStandalone target not found
 Native extension for OSXStandalone target not found
 Native extension for WebGL target not found
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 Refreshing native plugins compatible for Editor in 39.38 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
@@ -86,11 +96,21 @@ Domain Reload Profiling:
 	ReloadAssembly (1104ms)
 		BeginReloadAssembly (51ms)
 >>>>>>> 9a9f9e4ce1d7fa8afa626d86a2b838205e46d494
+=======
+Refreshing native plugins compatible for Editor in 39.94 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.103 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1104ms)
+		BeginReloadAssembly (51ms)
+>>>>>>> Stashed changes
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (0ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
 			CreateAndSetChildDomain (1ms)
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 		EndReloadAssembly (391ms)
 			LoadAssemblies (53ms)
@@ -108,15 +128,27 @@ Domain Reload Profiling:
 			RebuildScriptCaches (30ms)
 			SetupLoadedEditorAssemblies (172ms)
 >>>>>>> 9a9f9e4ce1d7fa8afa626d86a2b838205e46d494
+=======
+		EndReloadAssembly (433ms)
+			LoadAssemblies (50ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (158ms)
+			ReleaseScriptCaches (0ms)
+			RebuildScriptCaches (30ms)
+			SetupLoadedEditorAssemblies (172ms)
+>>>>>>> Stashed changes
 				LogAssemblyErrors (0ms)
 				InitializePlatformSupportModulesInManaged (7ms)
 				SetLoadedEditorAssemblies (0ms)
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 				RefreshPlugins (39ms)
 				BeforeProcessingInitializeOnLoad (13ms)
 				ProcessInitializeOnLoadAttributes (73ms)
 				ProcessInitializeOnLoadMethodAttributes (24ms)
 =======
+=======
+>>>>>>> Stashed changes
 				RefreshPlugins (40ms)
 				BeforeProcessingInitializeOnLoad (15ms)
 				ProcessInitializeOnLoadAttributes (84ms)
@@ -128,17 +160,22 @@ Domain Reload Profiling:
 			AwakeInstancesAfterBackupRestoration (0ms)
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 Registered in 0.006059 seconds.
 =======
 Registered in 0.003389 seconds.
 >>>>>>> 9a9f9e4ce1d7fa8afa626d86a2b838205e46d494
+=======
+Registered in 0.003389 seconds.
+>>>>>>> Stashed changes
 Begin MonoManager ReloadAssembly
 Native extension for Lumin target not found
 Native extension for LinuxStandalone target not found
 Native extension for WindowsStandalone target not found
 Native extension for OSXStandalone target not found
 Native extension for WebGL target not found
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 Refreshing native plugins compatible for Editor in 37.32 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
@@ -156,11 +193,21 @@ Domain Reload Profiling:
 	ReloadAssembly (1095ms)
 		BeginReloadAssembly (148ms)
 >>>>>>> 9a9f9e4ce1d7fa8afa626d86a2b838205e46d494
+=======
+Refreshing native plugins compatible for Editor in 36.29 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.094 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1095ms)
+		BeginReloadAssembly (148ms)
+>>>>>>> Stashed changes
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (4ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
 			CreateAndSetChildDomain (19ms)
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 		EndReloadAssembly (812ms)
 			LoadAssemblies (93ms)
@@ -173,14 +220,23 @@ Domain Reload Profiling:
 		EndReloadAssembly (887ms)
 			LoadAssemblies (93ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
+=======
+		EndReloadAssembly (887ms)
+			LoadAssemblies (93ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+>>>>>>> Stashed changes
 			SetupTypeCache (297ms)
 			ReleaseScriptCaches (1ms)
 			RebuildScriptCaches (46ms)
 			SetupLoadedEditorAssemblies (325ms)
+<<<<<<< Updated upstream
 >>>>>>> 9a9f9e4ce1d7fa8afa626d86a2b838205e46d494
+=======
+>>>>>>> Stashed changes
 				LogAssemblyErrors (0ms)
 				InitializePlatformSupportModulesInManaged (6ms)
 				SetLoadedEditorAssemblies (0ms)
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 				RefreshPlugins (37ms)
 				BeforeProcessingInitializeOnLoad (75ms)
@@ -188,12 +244,17 @@ Domain Reload Profiling:
 				ProcessInitializeOnLoadMethodAttributes (13ms)
 				AfterProcessingInitializeOnLoad (7ms)
 =======
+=======
+>>>>>>> Stashed changes
 				RefreshPlugins (36ms)
 				BeforeProcessingInitializeOnLoad (77ms)
 				ProcessInitializeOnLoadAttributes (187ms)
 				ProcessInitializeOnLoadMethodAttributes (11ms)
 				AfterProcessingInitializeOnLoad (9ms)
+<<<<<<< Updated upstream
 >>>>>>> 9a9f9e4ce1d7fa8afa626d86a2b838205e46d494
+=======
+>>>>>>> Stashed changes
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
 			AwakeInstancesAfterBackupRestoration (8ms)
@@ -201,6 +262,7 @@ Platform modules already initialized, skipping
 ========================================================================
 Worker process is ready to serve import requests
 Launched and connected shader compiler UnityShaderCompiler.exe after 0.05 seconds
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 Refreshing native plugins compatible for Editor in 0.45 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
@@ -220,6 +282,16 @@ System memory in use after: 94.3 MB.
 Unloading 32 unused Assets to reduce memory usage. Loaded Objects now: 2536.
 Total: 2.705400 ms (FindLiveObjects: 0.200700 ms CreateObjectMapping: 0.063400 ms MarkObjects: 2.306500 ms  DeleteObjects: 0.133500 ms)
 >>>>>>> 9a9f9e4ce1d7fa8afa626d86a2b838205e46d494
+=======
+Refreshing native plugins compatible for Editor in 0.42 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 2096 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 94.4 MB.
+System memory in use after: 94.3 MB.
+
+Unloading 32 unused Assets to reduce memory usage. Loaded Objects now: 2536.
+Total: 2.705400 ms (FindLiveObjects: 0.200700 ms CreateObjectMapping: 0.063400 ms MarkObjects: 2.306500 ms  DeleteObjects: 0.133500 ms)
+>>>>>>> Stashed changes
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
@@ -238,6 +310,7 @@ AssetImportParameters requested are different than current active one (requested
 ========================================================================
 <<<<<<< HEAD
 Received Import Request.
+<<<<<<< Updated upstream
   path: Assets/Prefabs/Edward.prefab
   artifactKey: Guid(eb8e9a45656d9104a9b7c3e7387e2b04) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
 Start importing Assets/Prefabs/Edward.prefab using Guid(eb8e9a45656d9104a9b7c3e7387e2b04) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1d48f425f4f8ddbc8eff103708ea9e16') in 0.092505 seconds 
@@ -878,4 +951,35 @@ Start importing Assets/Art/Menu/Sheets/OptionPressed_Sheet_Animation.anim using 
   Import took 0.033414 seconds .
 
 >>>>>>> 9a9f9e4ce1d7fa8afa626d86a2b838205e46d494
+=======
+  path: Assets/Animations/Menu/Animations
+  artifactKey: Guid(c45c45a20aa132f4c9a85c124710d74c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Animations/Menu/Animations using Guid(c45c45a20aa132f4c9a85c124710d74c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '47cbea00a33cfa8d8dd223264a64f86d') in 0.025195 seconds 
+  Import took 0.028026 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 10.419519 seconds.
+  path: Assets/Art/Menu/Sheets/PlayPressed_Sheet_Animation.anim
+  artifactKey: Guid(f4c22cff8e9cb084491d792b047356ab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Menu/Sheets/PlayPressed_Sheet_Animation.anim using Guid(f4c22cff8e9cb084491d792b047356ab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '18cbc7ed52db1c21b7aabad4cbf165e9') in 0.056019 seconds 
+  Import took 0.059174 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 97.906485 seconds.
+  path: Assets/Art/Menu/Sheets/QuitPressed_Sheet_Animation.anim
+  artifactKey: Guid(599e1c43eb12fd447a4ddcf992238a03) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Menu/Sheets/QuitPressed_Sheet_Animation.anim using Guid(599e1c43eb12fd447a4ddcf992238a03) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '21067769cf57d8fe2cb3e06e5daad487') in 0.032931 seconds 
+  Import took 0.038142 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 36.268836 seconds.
+  path: Assets/Art/Menu/Sheets/OptionPressed_Sheet_Animation.anim
+  artifactKey: Guid(43dc5cd8863235a4a806d64181dbf98e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Menu/Sheets/OptionPressed_Sheet_Animation.anim using Guid(43dc5cd8863235a4a806d64181dbf98e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f7d172be32f1e5c3e140f08170046675') in 0.030115 seconds 
+  Import took 0.033414 seconds .
+
+>>>>>>> Stashed changes
 AssetImportWorkerClient::OnTransportError - code=2 error=End of file

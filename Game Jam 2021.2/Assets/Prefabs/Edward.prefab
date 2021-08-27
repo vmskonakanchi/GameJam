@@ -200,8 +200,13 @@ MonoBehaviour:
   bulletPrefab: {fileID: 7494318182447787462, guid: fa9c6fb2b60d4a24892b8cde6cdaa8be, type: 3}
   playerbulletFirePoint: {fileID: 2864157610632835670}
   groundCheckPoint: {fileID: 2864157612602659924}
+<<<<<<< Updated upstream
   moveSpeed: 10
   jumpSpeed: 24
+=======
+  moveSpeed: 500
+  jumpSpeed: 500
+>>>>>>> Stashed changes
   launchForce: 10
   isOnGround: 0
 --- !u!114 &2864157611890962803
