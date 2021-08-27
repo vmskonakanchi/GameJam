@@ -20,20 +20,27 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        GetComponents();
+    }
+
+    private void GetComponents()
+    {
         rb = GetComponent<Rigidbody2D>();
         am = GetComponent<Animator>();
         gravitygun = gameObject.GetComponent<Gravitygun>();
     }
+
     void FixedUpdate()
     {
         Jump();
         Move();
         gravitygun.HitWithRay();
         ChecKGround();
-        Shoot();
+        
     }
     void Update()
     {
+        Shoot();
         PlayAnimations();
     }
     void Shoot()
@@ -121,6 +128,14 @@ public class PlayerController : MonoBehaviour
     public void BulletDamage()
     {
         Debug.Log("Hit with bullet by enemy");
+    }
+   public void GroundCheck()
+    {
+        Debug.Log("Hit Ground");
+    }
+    public void GroundUncheck()
+    {
+        Debug.Log("Not Hit Ground");
     }
 
 

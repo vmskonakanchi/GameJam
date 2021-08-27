@@ -197,7 +197,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65b091614d4613e4a87671c61ff31fa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 3663731943990626757, guid: e40b570e15a94cd4a97aaecbe127b295, type: 3}
+  bulletPrefab: {fileID: 7494318182447787462, guid: fa9c6fb2b60d4a24892b8cde6cdaa8be, type: 3}
   playerbulletFirePoint: {fileID: 2864157610632835670}
   groundCheckPoint: {fileID: 2864157612602659924}
   moveSpeed: 200
@@ -226,6 +226,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2864157612602659924}
+  - component: {fileID: 2290385073950609917}
   m_Layer: 0
   m_Name: groundcheck
   m_TagString: Untagged
@@ -247,3 +248,16 @@ Transform:
   m_Father: {fileID: 2864157611890962801}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2290385073950609917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2864157612602659925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5566ce987f7e4b43ac6a93422f1becc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerController: {fileID: 2864157611890962800}

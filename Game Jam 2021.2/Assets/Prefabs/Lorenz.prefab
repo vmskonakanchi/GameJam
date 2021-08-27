@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 2384134267844860737}
   - component: {fileID: 2384134267844860738}
   - component: {fileID: 2384134267844860742}
-  - component: {fileID: 2384134267844860743}
-  - component: {fileID: 2384134267844860736}
   - component: {fileID: 2384134267844860740}
   - component: {fileID: 2384134267844860741}
+  - component: {fileID: 492676452}
+  - component: {fileID: 492676451}
   m_Layer: 0
   m_Name: Lorenz
   m_TagString: Player
@@ -108,39 +108,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &2384134267844860743
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2384134267844860739}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65b091614d4613e4a87671c61ff31fa9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  groundCheck: {fileID: 5823124696492959775}
-  bulletPrefab: {fileID: 7494318182447787462, guid: fa9c6fb2b60d4a24892b8cde6cdaa8be, type: 3}
-  playerbulletFirePoint: {fileID: 2384134269263713659}
-  groundCheckPoint: {fileID: 2384134268643496138}
-  moveSpeed: 8
-  jumpSpeed: 22
-  launchForce: 10
-  isOnGround: 0
---- !u!114 &2384134267844860736
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2384134267844860739}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0c9ca2c01b0fd14f9ae44f9af74435c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  raycastDist: 10
 --- !u!50 &2384134267844860740
 Rigidbody2D:
   serializedVersion: 4
@@ -188,6 +155,38 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.13205001, y: 0.2918284}
   m_EdgeRadius: 0
+--- !u!114 &492676452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2384134267844860739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0c9ca2c01b0fd14f9ae44f9af74435c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  raycastDist: 10
+--- !u!114 &492676451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2384134267844860739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65b091614d4613e4a87671c61ff31fa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 7494318182447787462, guid: fa9c6fb2b60d4a24892b8cde6cdaa8be, type: 3}
+  playerbulletFirePoint: {fileID: 2384134269263713659}
+  groundCheckPoint: {fileID: 2384134268643496138}
+  moveSpeed: 200
+  jumpSpeed: 500
+  launchForce: 10
+  isOnGround: 0
 --- !u!1 &2384134268643496139
 GameObject:
   m_ObjectHideFlags: 0
@@ -198,7 +197,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2384134268643496138}
   - component: {fileID: 5823124696492959775}
-  - component: {fileID: 5823124696492959760}
+  - component: {fileID: 1435100924376440962}
   m_Layer: 0
   m_Name: GroundCheck
   m_TagString: Untagged
@@ -246,7 +245,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.64708424, y: 0.040097956}
   m_EdgeRadius: 0
---- !u!114 &5823124696492959760
+--- !u!114 &1435100924376440962
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -255,10 +254,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2384134268643496139}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c14a6a7cf054344286ecd310b5df785, type: 3}
+  m_Script: {fileID: 11500000, guid: d5566ce987f7e4b43ac6a93422f1becc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerController: {fileID: 2384134267844860743}
+  playerController: {fileID: 492676451}
 --- !u!1 &2384134269263713652
 GameObject:
   m_ObjectHideFlags: 0
