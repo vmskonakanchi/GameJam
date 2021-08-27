@@ -29,21 +29,13 @@ public class Gravitygun : MonoBehaviour
         {
             hit2d = Physics2D.Raycast(player.playerbulletFirePoint.position, correctpos, raycastDist);
             if (hit2d.rigidbody != null)
-<<<<<<< Updated upstream
+
             {
                 if (hit2d.rigidbody.gameObject.tag != "Player")
                 {
                     hit2d.rigidbody.gravityScale = -1;
                 }
-            }
-            if (Input.GetKey(KeyCode.LeftShift))
-=======
->>>>>>> Stashed changes
-            {
-                if (hit2d.rigidbody.gameObject.tag != "Player")
-                {
-                    hit2d.rigidbody.gravityScale = -1;
-                }
+
                 if (Input.GetKey(KeyCode.LeftShift))
                 {
                     if (hit2d.rigidbody.gameObject.tag != "Player")
@@ -51,13 +43,10 @@ public class Gravitygun : MonoBehaviour
                         hit2d.rigidbody.gravityScale = 1;
                     }
                 }
-
             }
-            else return;
-
-
+                  Debug.DrawRay(player.playerbulletFirePoint.position, correctpos, Color.green);
         }
 
-        Debug.DrawRay(player.playerbulletFirePoint.position, correctpos, Color.green);
-    }
+                else return;
+            }  
 }

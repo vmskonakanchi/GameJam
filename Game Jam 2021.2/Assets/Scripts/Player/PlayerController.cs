@@ -33,7 +33,6 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         gravitygun.HitWithRay();
-        //CheckGround();
         
     }
     void Update()
@@ -85,20 +84,6 @@ public class PlayerController : MonoBehaviour
             rb.velocity = new Vector2(0, rb.velocity.y);
         }
     }
-
-    /*void CheckGround()
-    {
-        Collider2D groundHit = Physics2D.OverlapCircle(groundCheckPoint.position, groundHitRadius);
-        if (groundHit == true)
-        {       
-            isOnGround = true;
-        }
-        else if (groundHit == false)
-        {
-            
-            isOnGround = false;
-        }
-    }*/
     void Jump()
     {
         //play jump sound
