@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
      public enum MyEnum
@@ -17,21 +18,33 @@ public class Patrol : MonoBehaviour
     private Vector3 leftRotation;
     private Vector3 rightRotation;
 
-    public int roboHp = 100;
+    LayerMask layerMask;
+
+    public Vector2 shootDistance;
+    public float roboHp = 100;
     public float speed;
     private bool movingRight = true;
 
+    private bool patrolState = true;
+    private bool isShooting = false;
+
+    public GameObject missile;
+    public Transform firePoint;
     public Transform groundDetection;
+    private Transform player;
     private Rigidbody2D rb;
+    private Animator anim;
 
     private void Start()
     {
+        layerMask = LayerMask.GetMask("Obstacle");
+        player = GameObject.FindGameObjectWithTag("Player").transform;
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
 
     private void Update()
     {
-        Die();
         if (roboPlacement == MyEnum.GroundOrPlatform)
         {
             right = Vector2.right;
@@ -61,17 +74,38 @@ public class Patrol : MonoBehaviour
             rightRotation = new Vector3(0, 0, 270);
         }
 
-        if (movingRight)
+        float playerDistanceX = Mathf.Abs(player.position.x - transform.position.x);
+        float playerDistanceY = Mathf.Abs(player.position.y - transform.position.y);
+
+        // The Raycast
+        RaycastHit2D hit = Physics2D.Linecast(transform.position, player.position, layerMask);
+
+        // If it hits the player
+        if (hit.collider == null && !isShooting && playerDistanceX < shootDistance.x && playerDistanceY < shootDistance.y)
         {
-            rb.velocity = speed * right;
+            patrolState = false;
         }
-        else
+
+        if (patrolState && !isShooting)
         {
-            rb.velocity = -speed * right;
+            if (movingRight)
+            {
+                rb.velocity = speed * right;
+            }
+            else
+            {
+                rb.velocity = -speed * right;
+            }
+        }
+        else if (!patrolState && !isShooting)
+        {
+            rb.velocity = Vector2.zero;
+            StartCoroutine(Shoot());
         }
 
         RaycastHit2D edgeCheck = Physics2D.Raycast(groundDetection.position, down, 0.5f);
         RaycastHit2D frontCheck = Physics2D.Raycast(groundDetection.position, right, 0.1f);
+
         if (!edgeCheck.collider || frontCheck)
         {
             if(movingRight)
@@ -86,16 +120,29 @@ public class Patrol : MonoBehaviour
             }
         }
     }
+
+    IEnumerator Shoot()
+    {
+        patrolState = false;
+        isShooting = true;
+        anim.Play("Robo Shoot");
+        yield return new WaitForSeconds(1f);
+        Instantiate(missile, firePoint.position, new Quaternion(right.x, right.y, 0, 0));
+        patrolState = true;
+        isShooting = false;
+    }
+
     void Die()
     {
-        if(roboHp == 0)
+        if (roboHp == 0)
         {
             Destroy(this.gameObject, 1f);
             //Play Death Animation
         }
     }
+
     public void Damage()
     {
-        roboHp -= 10;
+        roboHp -= 12.5f;
     }
 }

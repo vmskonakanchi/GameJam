@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 5735668437212797316}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 8.12, y: -6.48, z: -15.151639}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 5735668439041857194}
   m_Father: {fileID: 0}
@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4616a9eef7a9c7e498fd5ea40886743a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  missileDamage: 10
 --- !u!50 &5735668437212797320
 Rigidbody2D:
   serializedVersion: 4
@@ -80,7 +81,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.089763165, y: -0.008160055}
+  m_Offset: {x: -0.05442238, y: 0.08372474}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -91,7 +92,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.8204737, y: 0.5593425}
+  m_Size: {x: 0.38225174, y: 0.8562026}
   m_EdgeRadius: 0
 --- !u!1 &5735668439041857191
 GameObject:
@@ -118,7 +119,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5735668439041857191}
-  m_LocalRotation: {x: -0, y: -0, z: -0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.5167001, y: 1.5167001, z: 1.5167}
   m_Children: []

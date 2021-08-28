@@ -39,16 +39,14 @@ public class Missile : MonoBehaviour
     //Collision check
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Explode();
-
         if(collision.collider.tag == "Player")
         {
-<<<<<<< Updated upstream
-            //(ADD) Damage or Kill the Player
-=======
             //Damage or Kill the Player
             playerController.playerHP -= missileDamage;
->>>>>>> Stashed changes
+        }
+        else if (collision.gameObject.GetComponent<Patrol>() == null)
+        {
+            Explode();
         }
     }
 
