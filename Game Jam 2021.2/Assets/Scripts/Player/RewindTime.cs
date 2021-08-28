@@ -1,12 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-    public class RewindTime : MonoBehaviour
+public class RewindTime : MonoBehaviour
 {
-    List<Vector2> position; 
-    List<Quaternion> rotation; 
+    List <Vector2> position;
+    List <Quaternion> rotation;
 
-   
+
+
     void Start()
     {
             position = new List<Vector2>();
@@ -15,50 +15,50 @@ using UnityEngine;
 
       
      void Update()
-     {
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
+    {
+      
             RecordTime();
-        }
-        else if (Input.GetKeyUp(KeyCode.Tab))
+      
+        if (Input.GetKey(KeyCode.Tab))
         {
             Rewindtime();
         }
     }
 
-
-    void FixedUpdate()
-    {
-        
-    }
-
-    void RecordTime()
+    private void RecordTime()
     {
         position.Insert(0, transform.position);
         rotation.Insert(0, transform.rotation);
-        if (position.Count > Mathf.RoundToInt(5f / Time.fixedDeltaTime))
+       // if (position.Count > Mathf.RoundToInt(5f / Time.fixedDeltaTime))
+       //{
+       //     position.RemoveAt(position.Count - 1);
+       //}
+       // else if (rotation.Count > Mathf.RoundToInt(5f / Time.fixedDeltaTime))
+       //{
+       //     rotation.RemoveAt(rotation.Count - 1);
+       // }     
+        if(position.Count > 0)
         {
-            position.RemoveAt(position.Count - 1);
+            Debug.Log("recording Positons");
         }
-        else if (rotation.Count > Mathf.RoundToInt(5f / Time.fixedDeltaTime))
-        {
-            rotation.RemoveAt(rotation.Count - 1);
-        }
-    }
-
+   }
     void Rewindtime()
     {
-        if (rotation.Count > 0)
+        if (position.Count > 0)
         {
             transform.position = position[0];
             position.RemoveAt(0);
+        }
+        else if(position.Count == 0)
+        {
+            Debug.Log("Not Recording positions");
         }
         else if (rotation.Count > 0)
         {
             transform.rotation = rotation[0];
             rotation.RemoveAt(0);
         }
-    }  
+    } 
 }
 
 

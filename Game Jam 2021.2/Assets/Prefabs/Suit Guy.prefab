@@ -240,10 +240,11 @@ MonoBehaviour:
   firePoint: {fileID: 4386654151898624801}
   bullet: {fileID: 7494318182447787462, guid: fa9c6fb2b60d4a24892b8cde6cdaa8be, type: 3}
   muzzleFlash: {fileID: 7061222486217906039, guid: c567fa18b7ae9d44ba16d3734dba31c5, type: 3}
-  startFacingLeft: 0
+  startFacingLeft: 1
   chase_Range: {x: 12, y: 4}
   shooting_Range: {x: 7, y: 2}
   shootingInterval: 1
+  enemyHP: 100
   bulletSpeed: 20
   speed: 7
 --- !u!1 &6854340667744955333

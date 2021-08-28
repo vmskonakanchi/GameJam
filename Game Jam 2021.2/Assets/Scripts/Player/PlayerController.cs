@@ -1,9 +1,13 @@
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
     Rigidbody2D rb;
     Animator am;
+    public Button retryButton;
+    public Slider slider;
     Gravitygun gravitygun;
     [Header("Components Required")]
     public GameObject bulletPrefab;
@@ -12,11 +16,11 @@ public class PlayerController : MonoBehaviour
     [Space(3f)]
     [SerializeField] float moveSpeed;
     [SerializeField] float jumpSpeed;
-    //[SerializeField] int playerHP = 100;
+    public int playerHP = 100;
     [SerializeField] public float launchForce;
     [SerializeField] bool isOnGround;
     float groundHitRadius = 0.08f;
-    // bool isGravitygunon = false;
+    public bool hasgravityGun = false;
 
     void Start()
     {
@@ -28,6 +32,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         am = GetComponent<Animator>();
         gravitygun = gameObject.GetComponent<Gravitygun>();
+        
     }
 
     void FixedUpdate()
@@ -41,11 +46,11 @@ public class PlayerController : MonoBehaviour
         Move();
         Shoot();
         PlayAnimations();
+        Die();
+        UpdateUI();
     }
     void Shoot()
     {
-        //Instataite projectiles depending upon ammo type 
-        //play shoot sound
         if (Input.GetMouseButtonDown(0))
         {
             am.SetTrigger("Shoot");
@@ -62,9 +67,6 @@ public class PlayerController : MonoBehaviour
 
     void Move()
     {
-
-        //play sound 
-        //play particles if any
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         if (Input.GetKey(KeyCode.A))
         {
@@ -86,8 +88,6 @@ public class PlayerController : MonoBehaviour
     }
     void Jump()
     {
-        //play jump sound
-        //play particls if any
         if (Input.GetKeyDown(KeyCode.Space) && isOnGround == true)
         {
             isOnGround = false;
@@ -116,6 +116,7 @@ public class PlayerController : MonoBehaviour
     }
     public void BulletDamage()
     {
+        playerHP -= 5;
         Debug.Log("Hit with bullet by enemy");
     }
    public void GroundCheck()
@@ -128,7 +129,29 @@ public class PlayerController : MonoBehaviour
         isOnGround = false;
         Debug.Log("Not Hit Ground");
     }
+    void UpdateUI()
+    {
+        slider.value = playerHP;
+    }
+    void Die()
+    {      
+        if(playerHP == 0 )
+        {
+            Debug.Log("Player Died");
+            Destroy(gameObject, 1f);
+            ShowRestartbuttons();         
+        }
+    }
+    void ShowRestartbuttons()
+    {
+        retryButton.gameObject.SetActive(true);
 
+    }
+    public void RetryButton()
+    {
+        Scene presentScene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(presentScene.name);
+    }
 
     void OnDrawGizmosSelected()
     {

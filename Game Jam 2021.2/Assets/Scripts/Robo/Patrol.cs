@@ -17,6 +17,7 @@ public class Patrol : MonoBehaviour
     private Vector3 leftRotation;
     private Vector3 rightRotation;
 
+    public int roboHp = 100;
     public float speed;
     private bool movingRight = true;
 
@@ -30,6 +31,7 @@ public class Patrol : MonoBehaviour
 
     private void Update()
     {
+        Die();
         if (roboPlacement == MyEnum.GroundOrPlatform)
         {
             right = Vector2.right;
@@ -83,5 +85,17 @@ public class Patrol : MonoBehaviour
                 movingRight = true;
             }
         }
+    }
+    void Die()
+    {
+        if(roboHp == 0)
+        {
+            Destroy(this.gameObject, 1f);
+            //Play Death Animation
+        }
+    }
+    public void Damage()
+    {
+        roboHp -= 10;
     }
 }

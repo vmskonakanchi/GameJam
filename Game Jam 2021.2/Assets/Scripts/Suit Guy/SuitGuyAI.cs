@@ -29,6 +29,7 @@ public class SuitGuyAI : MonoBehaviour
     private bool canShoot = true;
     private bool isShooting = false;
 
+    public int enemyHP = 100;
     public float bulletSpeed;
     public float speed;
     private bool isGrounded = true;
@@ -58,6 +59,7 @@ public class SuitGuyAI : MonoBehaviour
 
     private void Update()
     {
+        Die();
         // If not in shooting state, plsy animations
         if (!shooting_State)
         {
@@ -120,7 +122,7 @@ public class SuitGuyAI : MonoBehaviour
                 shooting_State = false;
                 canMove = false;
             }
-            Debug.Log("Not Spotted");
+           // Debug.Log("Not Spotted");
         }
         else
         {
@@ -129,7 +131,7 @@ public class SuitGuyAI : MonoBehaviour
             {
                 targetPosition = player.position.x;
             }
-            Debug.Log("Spotted");
+            //Debug.Log("Spotted");
         }
 
         // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
@@ -220,6 +222,20 @@ public class SuitGuyAI : MonoBehaviour
         if (Mathf.Abs(targetPosition - transform.position.x) < 0.1f) rb.velocity = new Vector2(0, rb.velocity.y);
     }
 
+    void Die()
+    {
+        if(enemyHP == 0)
+        {
+            Destroy(this.gameObject, 1f);
+            Debug.Log(" Enemy Died");
+            //Play Death Animation
+        }
+    }
+    public void Damage()
+    {
+        enemyHP -= 10;
+    }
+
     // Groundcheck from EnemyAI_GC script
     public void GroundCheck()
     {
@@ -235,7 +251,7 @@ public class SuitGuyAI : MonoBehaviour
     {
         yield return new WaitForSeconds(0.36f);
         anim.Play("Enemy Shooting");
-        Debug.Log("Shoot");
+        //Debug.Log("Shoot");
         GameObject b = Instantiate(bullet, firePoint.position, Quaternion.identity);
         GameObject mf = Instantiate(muzzleFlash, firePoint);
         b.transform.GetComponent<Rigidbody2D>().velocity = new Vector2(bulletSpeed * movingDirection, 0);

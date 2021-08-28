@@ -6,17 +6,20 @@ public class Missile : MonoBehaviour
 {
     // Start is called before the first frame update
     Transform player;
+    PlayerController playerController;
 
     float speed = 8;
     Rigidbody2D rb;
 
     float timer = 4;
+    public int missileDamage = 10;
 
 
 
 
     void Start()
     {
+        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         rb = GetComponent<Rigidbody2D>();
         
@@ -26,10 +29,8 @@ public class Missile : MonoBehaviour
     private void Update()
     {
         Timer();
-        
-    }
 
-    // Update is called once per frame
+    }
     void FixedUpdate()
     {
         Follow();
@@ -42,7 +43,12 @@ public class Missile : MonoBehaviour
 
         if(collision.collider.tag == "Player")
         {
+<<<<<<< Updated upstream
             //(ADD) Damage or Kill the Player
+=======
+            //Damage or Kill the Player
+            playerController.playerHP -= missileDamage;
+>>>>>>> Stashed changes
         }
     }
 

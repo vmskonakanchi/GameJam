@@ -21,11 +21,15 @@ public class Camera_Follow : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        if(target != null)
+        {
         if (Input.GetAxisRaw("Horizontal") > 0) desiredOffset = new Vector3(offset.x + 2, offset.y, offset.z);
         else if (Input.GetAxisRaw("Horizontal") < 0) desiredOffset = new Vector3(offset.x - 2, offset.y, offset.z);
         else desiredOffset = offset;
         desiredPosition = target.position + desiredOffset;
         finalPosition = new Vector3(Mathf.Clamp(desiredPosition.x, leftLimit + cameraSizeLR, rightLimit - cameraSizeLR),Mathf.Clamp(desiredPosition.y, bottomLimit + cameraSizeBT, topLimit - cameraSizeBT), desiredPosition.z);
         transform.position = Vector3.Lerp(transform.position, finalPosition, smoothSpeed * Time.deltaTime);
+
+        }
     }
 }

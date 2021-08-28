@@ -9,6 +9,14 @@ public class Bullet : MonoBehaviour
             col.GetComponent<PlayerController>().BulletDamage();
             Destroy(gameObject);
         }
+        else if(col.CompareTag("Enemy"))
+        {
+            col.GetComponent<SuitGuyAI>().Damage();
+        }
+        else if (col.CompareTag("RoboEnemy"))
+        {
+            col.GetComponent<Patrol>().Damage();
+        }
         else if (col.IsTouchingLayers(9))
         {
             Destroy(gameObject);
