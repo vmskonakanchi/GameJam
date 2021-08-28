@@ -35,17 +35,19 @@ public class Missile : MonoBehaviour
         Follow();
     }
 
-
+    //Collision check
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Explode();
 
         if(collision.collider.tag == "Player")
         {
-            //Damage or Kill the Player
+            //(ADD) Damage or Kill the Player
         }
     }
 
+
+    //Timer for missile to explode
     void Timer()
     {
         if (Time.time > timer)
@@ -54,7 +56,7 @@ public class Missile : MonoBehaviour
         }
     }
 
-
+    //Function that the missile follows the player and calls the rotate function
     void Follow()
     {
         transform.position = Vector2.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
@@ -62,9 +64,12 @@ public class Missile : MonoBehaviour
         RotateTowards(player.position);
     }
 
+    //Explosions function
     void Explode()
     {
+        // (ADD) Explosion FX
         Destroy(this.gameObject);
+
     }
 
 
@@ -72,7 +77,7 @@ public class Missile : MonoBehaviour
 
 
 
-
+    //Function to rotate the missile towards the player
     private void RotateTowards(Vector2 target)
     {
         var offset = 90f;
