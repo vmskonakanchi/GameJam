@@ -20,7 +20,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public float launchForce;
     [SerializeField] bool isOnGround;
     float groundHitRadius = 0.08f;
-    public bool hasgravityGun = false;
+    public bool hasgravityGun;
+    public bool hasEneryGun = false;
+    public GameObject GravityGun;
+    public GameObject EnergyGun;
 
     void Start()
     {
@@ -31,37 +34,53 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         am = GetComponent<Animator>();
-        gravitygun = gameObject.GetComponent<Gravitygun>();
-        
+        gravitygun = gameObject.GetComponent<Gravitygun>();       
     }
 
     void FixedUpdate()
     {
         gravitygun.HitWithRay();
-        
     }
     void Update()
     {
-        Jump();
         Move();
+        Jump();
+        ChangeGunsAndShoot();
         Shoot();
         PlayAnimations();
         Die();
         UpdateUI();
         CheckGround();
+             
+    }
+
+
+    void ChangeGunsAndShoot()
+    {
+        if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            hasgravityGun = false;
+            hasEneryGun = true;
+            EnergyGun.gameObject.SetActive(true);
+            GravityGun.gameObject.SetActive(false);   
+        }
+        else if(Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            hasEneryGun = false;
+            hasgravityGun = true;
+            GravityGun.gameObject.SetActive(true);
+            EnergyGun.gameObject.SetActive(false);           
+        }
     }
     void Shoot()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) )
         {
-            am.SetTrigger("Shoot");
-            GameObject newbullet = Instantiate(bulletPrefab, playerbulletFirePoint.position, Quaternion.identity);
-            newbullet.GetComponent<Rigidbody2D>().velocity = playerbulletFirePoint.rotation * Vector2.right * launchForce;
-        }
-        else
-        {
-            am.SetBool("hasGun", false);
-            return;
+            if (hasEneryGun == true)
+            { 
+                GameObject newbullet = Instantiate(bulletPrefab, playerbulletFirePoint.position, Quaternion.identity);
+                newbullet.GetComponent<Rigidbody2D>().velocity = playerbulletFirePoint.rotation * Vector2.right * launchForce;
+            }
         }
 
     }

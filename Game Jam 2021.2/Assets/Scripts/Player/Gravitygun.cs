@@ -7,20 +7,20 @@ public class Gravitygun : MonoBehaviour
     RaycastHit2D hit2d;
     Vector3 mousePos;
     Vector3 correctpos;
-
+    Animation am;
 
 
     void Start()
     {
         player = gameObject.GetComponent<PlayerController>();
-
+        am = GetComponent<Animation>();
     }
 
     public void HitWithRay()
     {
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         correctpos = (mousePos - player.playerbulletFirePoint.position).normalized;
-        if (Input.GetMouseButton(1))
+        if (Input.GetMouseButton(1) && player.GravityGun.activeSelf == true)
         {
             player.hasgravityGun = true;
             hit2d = Physics2D.Raycast(player.playerbulletFirePoint.position, correctpos, raycastDist);

@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
      public enum MyEnum
 {
@@ -34,9 +35,11 @@ public class Patrol : MonoBehaviour
     private Transform player;
     private Rigidbody2D rb;
     private Animator anim;
+    private Slider slider;
 
     private void Start()
     {
+        slider = gameObject.GetComponentInChildren<Slider>();
         layerMask = LayerMask.GetMask("Obstacle");
         player = GameObject.FindGameObjectWithTag("Player").transform;
         rb = GetComponent<Rigidbody2D>();
@@ -45,6 +48,7 @@ public class Patrol : MonoBehaviour
 
     private void Update()
     {
+        UpdateHealth();
         Die();
         if (roboPlacement == MyEnum.GroundOrPlatform)
         {
@@ -133,6 +137,10 @@ public class Patrol : MonoBehaviour
         isShooting = false;
     }
 
+    void UpdateHealth()
+    {
+        slider.value = roboHp;
+    }
     void Die()
     {
         if (roboHp == 0)

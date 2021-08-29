@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 // Attach this script to the Enemy prefab and the EnemyAI_GC to the Groundcheck inside the prefab
 // Fill out the fields for both scripts and tada
@@ -14,6 +15,7 @@ public class SuitGuyAI : MonoBehaviour
     private Transform player;
     private Rigidbody2D rb;
     private Animator anim;
+    private Slider slider;
 
     [SerializeField] private Transform firePoint;
     [SerializeField] private GameObject bullet;
@@ -47,6 +49,7 @@ public class SuitGuyAI : MonoBehaviour
 
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        slider = gameObject.GetComponentInChildren<Slider>();
 
         targetPosition = transform.position.x;
 
@@ -59,6 +62,7 @@ public class SuitGuyAI : MonoBehaviour
 
     private void Update()
     {
+        UpdateHealth();
         Die();
         // If not in shooting state, plsy animations
         if (!shooting_State)
@@ -85,179 +89,187 @@ public class SuitGuyAI : MonoBehaviour
 
     private void FixedUpdate()
     {
-        float playerDistanceX = Mathf.Abs(player.position.x - transform.position.x);
-        float playerDistanceY = Mathf.Abs(player.position.y - transform.position.y);
-
-        // Change States, but only when not in middle of shooting
-        if (!isShooting)
+        if (player != null)
         {
-            if (playerDistanceX < chase_Range.x && playerDistanceX > shooting_Range.x && (playerDistanceY < chase_Range.y || playerDistanceY > shooting_Range.y))
+            float playerDistanceX = Mathf.Abs(player.position.x - transform.position.x);
+            float playerDistanceY = Mathf.Abs(player.position.y - transform.position.y);
+
+            // Change States, but only when not in middle of shooting
+            if (!isShooting)
             {
-                chase_State = true;
-                shooting_State = false;
+                if (playerDistanceX < chase_Range.x && playerDistanceX > shooting_Range.x && (playerDistanceY < chase_Range.y || playerDistanceY > shooting_Range.y))
+                {
+                    chase_State = true;
+                    shooting_State = false;
+                }
+
+                else if (playerDistanceX < shooting_Range.x && playerDistanceY < shooting_Range.y)
+                {
+                    chase_State = false;
+                    shooting_State = true;
+                }
+
+                else
+                {
+                    chase_State = false;
+                    shooting_State = false;
+                }
             }
 
-            else if (playerDistanceX < shooting_Range.x && playerDistanceY < shooting_Range.y)
-            {
-                chase_State = false;
-                shooting_State = true;
-            }
+            // The Raycast
+            RaycastHit2D hit = Physics2D.Linecast(transform.position, player.position, layerMask);
 
+            // If it hits the player
+            if (hit.collider != null)
+            {
+                if (shooting_State && !isShooting)
+                {
+                    chase_State = true;
+                    shooting_State = false;
+                    canMove = false;
+                }
+                // Debug.Log("Not Spotted");
+            }
             else
             {
-                chase_State = false;
-                shooting_State = false;
-            }
-        }
-
-        // The Raycast
-        RaycastHit2D hit = Physics2D.Linecast(transform.position, player.position, layerMask);
-
-        // If it hits the player
-        if (hit.collider != null)
-        {
-            if (shooting_State && !isShooting)
-            {
-                chase_State = true;
-                shooting_State = false;
-                canMove = false;
-            }
-           // Debug.Log("Not Spotted");
-        }
-        else
-        {
-            // Set a destination
-            if (chase_State || shooting_State)
-            {
-                targetPosition = player.position.x;
-            }
-            //Debug.Log("Spotted");
-        }
-
-        // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-
-        // When ready to shoot, shoot
-        if (shooting_State)
-        {
-            if (canShoot)
-            {
-                canShoot = false;
-                isShooting = true;
-                StartCoroutine(Shoot());
-            }
-        }
-
-        // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-
-        // When chasing
-        if (chase_State)
-        {
-            // Define moving direction
-            if (targetPosition - transform.position.x > 0 && !startFacingLeft)
-            {
-                movingDirection = 1;
-                transform.rotation = Quaternion.Euler(0, 0, 0);
-            }
-            else if (targetPosition - transform.position.x > 0 && startFacingLeft)
-            {
-                movingDirection = 1;
-                transform.rotation = Quaternion.Euler(0, 0, 0);
+                // Set a destination
+                if (chase_State || shooting_State)
+                {
+                    targetPosition = player.position.x;
+                }
+                //Debug.Log("Spotted");
             }
 
-            else if (targetPosition - transform.position.x < 0 && !startFacingLeft)
+            // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+            // When ready to shoot, shoot
+            if (shooting_State)
             {
-                movingDirection = -1;
-                transform.rotation = Quaternion.Euler(0, 180, 0);
-            }
-            else if (targetPosition - transform.position.x < 0 && startFacingLeft)
-            {
-                movingDirection = -1;
-                transform.rotation = Quaternion.Euler(0, 180, 0);
-            }
-        }
-        // When shooting
-        else if (shooting_State)
-        {
-            // Define moving direction
-            if (player.position.x - transform.position.x > 0)
-            {
-                movingDirection = 1;
-                transform.rotation = Quaternion.Euler(0, 0, 0);
-            }
-            else if (player.position.x - transform.position.x > 0 && startFacingLeft)
-            {
-                movingDirection = 1;
-                transform.rotation = Quaternion.Euler(0, 0, 0);
+                if (canShoot)
+                {
+                    canShoot = false;
+                    isShooting = true;
+                    StartCoroutine(Shoot());
+                }
             }
 
-            else if (player.position.x - transform.position.x < 0)
+            // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+            // When chasing
+            if (chase_State)
             {
-                movingDirection = -1;
-                transform.rotation = Quaternion.Euler(0, 180, 0);
+                // Define moving direction
+                if (targetPosition - transform.position.x > 0 && !startFacingLeft)
+                {
+                    movingDirection = 1;
+                    transform.rotation = Quaternion.Euler(0, 0, 0);
+                }
+                else if (targetPosition - transform.position.x > 0 && startFacingLeft)
+                {
+                    movingDirection = 1;
+                    transform.rotation = Quaternion.Euler(0, 0, 0);
+                }
+
+                else if (targetPosition - transform.position.x < 0 && !startFacingLeft)
+                {
+                    movingDirection = -1;
+                    transform.rotation = Quaternion.Euler(0, 180, 0);
+                }
+                else if (targetPosition - transform.position.x < 0 && startFacingLeft)
+                {
+                    movingDirection = -1;
+                    transform.rotation = Quaternion.Euler(0, 180, 0);
+                }
             }
-            else if (player.position.x - transform.position.x < 0 && startFacingLeft)
+            // When shooting
+            else if (shooting_State)
             {
-                movingDirection = -1;
-                transform.rotation = Quaternion.Euler(0, 180, 0);
+                // Define moving direction
+                if (player.position.x - transform.position.x > 0)
+                {
+                    movingDirection = 1;
+                    transform.rotation = Quaternion.Euler(0, 0, 0);
+                }
+                else if (player.position.x - transform.position.x > 0 && startFacingLeft)
+                {
+                    movingDirection = 1;
+                    transform.rotation = Quaternion.Euler(0, 0, 0);
+                }
+
+                else if (player.position.x - transform.position.x < 0)
+                {
+                    movingDirection = -1;
+                    transform.rotation = Quaternion.Euler(0, 180, 0);
+                }
+                else if (player.position.x - transform.position.x < 0 && startFacingLeft)
+                {
+                    movingDirection = -1;
+                    transform.rotation = Quaternion.Euler(0, 180, 0);
+                }
             }
-        }
 
-        // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+            // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-        if (!shooting_State && canMove && isGrounded)
-        {
-            // Move enemy on the X axis in direction to the last spot the player was seen, only if grounded
-            if (isGrounded)
+            if (!shooting_State && canMove && isGrounded)
             {
-                rb.velocity = new Vector2(speed * movingDirection, rb.velocity.y);
+                // Move enemy on the X axis in direction to the last spot the player was seen, only if grounded
+                if (isGrounded)
+                {
+                    rb.velocity = new Vector2(speed * movingDirection, rb.velocity.y);
+                }
             }
-        }
-        else if (!canMove)
-        {
-            rb.velocity = Vector2.zero;
-            canMove = true;
-        }
+            else if (!canMove)
+            {
+                rb.velocity = Vector2.zero;
+                canMove = true;
+            }
 
-        // Stop movement when close to target position to avoid gittering
-        if (Mathf.Abs(targetPosition - transform.position.x) < 0.1f) rb.velocity = new Vector2(0, rb.velocity.y);
-    }
-
-    void Die()
-    {
-        if(enemyHP == 0)
-        {
-            Destroy(this.gameObject, 1f);
-            Debug.Log(" Enemy Died");
-            //Play Death Animation
+            // Stop movement when close to target position to avoid gittering
+            if (Mathf.Abs(targetPosition - transform.position.x) < 0.1f) rb.velocity = new Vector2(0, rb.velocity.y);
         }
     }
-    public void Damage()
-    {
-        enemyHP -= 10;
-    }
 
-    // Groundcheck from EnemyAI_GC script
-    public void GroundCheck()
-    {
-        isGrounded = true;
-    }
-    public void GroundUncheck()
-    {
-        isGrounded = false;
-    }
+        void Die()
+        {
+            if (enemyHP == 0)
+            {
+                Destroy(this.gameObject, 1f);
+                Debug.Log(" Enemy Died");
+                //Play Death Animation
+            }
+        }
+        void UpdateHealth()
+        {
+            slider.value = enemyHP;
+        }
+        public void Damage()
+        {
+            enemyHP -= 10;
+        }
 
-    // Coroutine with shoot code
-    private IEnumerator Shoot()
-    {
-        yield return new WaitForSeconds(0.36f);
-        anim.Play("Enemy Shooting");
-        //Debug.Log("Shoot");
-        GameObject b = Instantiate(bullet, firePoint.position, Quaternion.identity);
-        GameObject mf = Instantiate(muzzleFlash, firePoint);
-        b.transform.GetComponent<Rigidbody2D>().velocity = new Vector2(bulletSpeed * movingDirection, 0);
-        Destroy(mf, 0.1f);
-        isShooting = false;
-        yield return new WaitForSeconds(shootingInterval - 0.36f);
-        canShoot = true;
-    }
+        // Groundcheck from EnemyAI_GC script
+        public void GroundCheck()
+        {
+            isGrounded = true;
+        }
+        public void GroundUncheck()
+        {
+            isGrounded = false;
+        }
+
+        // Coroutine with shoot code
+        private IEnumerator Shoot()
+        {
+            yield return new WaitForSeconds(0.36f);
+            anim.Play("Enemy Shooting");
+            //Debug.Log("Shoot");
+            GameObject b = Instantiate(bullet, firePoint.position, Quaternion.identity);
+            GameObject mf = Instantiate(muzzleFlash, firePoint);
+            b.transform.GetComponent<Rigidbody2D>().velocity = new Vector2(bulletSpeed * movingDirection, 0);
+            Destroy(mf, 0.1f);
+            isShooting = false;
+            yield return new WaitForSeconds(shootingInterval - 0.36f);
+            canShoot = true;
+        }
+     
 }
