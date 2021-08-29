@@ -177,3 +177,4 @@ Received Import Request.
 Start importing Assets/Prefabs/Suit Guy.prefab using Guid(ee713b00b730cb948b89cafaa7451cd9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '01ecc7db446b672186497c4cdc041b5f') in 0.029636 seconds 
   Import took 0.034987 seconds .
 
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file
