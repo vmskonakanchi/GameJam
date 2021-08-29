@@ -10,7 +10,7 @@ public class Missile : MonoBehaviour
 
     float speed = 8;
     Rigidbody2D rb;
-
+    Animation am;
     float timer = 4;
     public int missileDamage = 10;
 
@@ -22,7 +22,7 @@ public class Missile : MonoBehaviour
         playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         rb = GetComponent<Rigidbody2D>();
-        
+        am = GetComponent<Animation>();
         
     }
 
@@ -40,8 +40,8 @@ public class Missile : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.collider.tag == "Player")
-        {
-            //Damage or Kill the Player
+        { 
+            Destroy(gameObject);
             playerController.playerHP -= missileDamage;
         }
         else if (collision.gameObject.GetComponent<Patrol>() == null)
@@ -71,7 +71,7 @@ public class Missile : MonoBehaviour
     //Explosions function
     void Explode()
     {
-        // (ADD) Explosion FX
+        
         Destroy(this.gameObject);
 
     }

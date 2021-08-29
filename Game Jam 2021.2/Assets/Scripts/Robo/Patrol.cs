@@ -45,6 +45,7 @@ public class Patrol : MonoBehaviour
 
     private void Update()
     {
+        Die();
         if (roboPlacement == MyEnum.GroundOrPlatform)
         {
             right = Vector2.right;

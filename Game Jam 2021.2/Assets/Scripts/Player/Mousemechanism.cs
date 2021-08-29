@@ -1,16 +1,16 @@
-﻿using System.Collections;
-using UnityEngine;
-
-namespace Assets.Scripts.Player
-{
+﻿using UnityEngine;
     public class Mousemechanism : MonoBehaviour
-    { 
-        void Update()
+    {
+    PlayerController player;
+    private void Start()
+    {
+        player = GetComponent<PlayerController>();
+    }
+    void Update()
         {
-            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector2 arrowPos = transform.position;
-            Vector2 arrowDirection = mousePos - arrowPos;
-            transform.right = arrowDirection;
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 correctPos = mousePos - Input.mousePosition;
+            transform.position = player.playerbulletFirePoint.position - correctPos;
+            transform.rotation = player.playerbulletFirePoint.rotation;
         }
     }
-}

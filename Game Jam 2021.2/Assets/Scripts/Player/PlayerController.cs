@@ -48,6 +48,7 @@ public class PlayerController : MonoBehaviour
         PlayAnimations();
         Die();
         UpdateUI();
+        CheckGround();
     }
     void Shoot()
     {
@@ -63,6 +64,12 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
+    }
+    void CheckGround()
+    {
+        Collider2D groundInfo = Physics2D.OverlapCircle(groundCheckPoint.position, groundHitRadius);
+        if (groundInfo == true) isOnGround = true;
+        else isOnGround = false;
     }
 
     void Move()
@@ -118,16 +125,6 @@ public class PlayerController : MonoBehaviour
     {
         playerHP -= 5;
         Debug.Log("Hit with bullet by enemy");
-    }
-   public void GroundCheck()
-    {
-        isOnGround = true;
-        Debug.Log("Hit Ground");
-    }
-    public void GroundUncheck()
-    {
-        isOnGround = false;
-        Debug.Log("Not Hit Ground");
     }
     void UpdateUI()
     {
