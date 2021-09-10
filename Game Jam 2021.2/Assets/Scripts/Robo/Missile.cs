@@ -1,87 +1,78 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Missile : MonoBehaviour
 {
-    // Start is called before the first frame update
-    Transform player;
+    GameObject player;
+    Transform playerPos;
     PlayerController playerController;
 
-    float speed = 8;
+    float speed = 8f;
     Rigidbody2D rb;
-    Animation am;
-    float timer = 4;
+    float timer = 2f;
     public int missileDamage = 10;
-
-
-
-
     void Start()
     {
-        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        GetComponents();
+    }
+
+    private void GetComponents()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null) playerPos = player.transform;
+        if (player != null) playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         rb = GetComponent<Rigidbody2D>();
-        am = GetComponent<Animation>();
-        
     }
 
     private void Update()
     {
-        Timer();
+        if (player != null) StartCoroutine(Timer());
 
     }
     void FixedUpdate()
     {
-        Follow();
+        if (player != null) Follow();
+
     }
 
     //Collision check
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.collider.tag == "Player")
-        { 
-            Destroy(gameObject);
-            playerController.playerHP -= missileDamage;
-        }
-        else if (collision.gameObject.GetComponent<Patrol>() == null)
+        if (player != null)
         {
-            Explode();
+
+            if (collision.collider.tag == "Player")
+            {
+                Debug.Log("Hit By Robo Missile");
+                Destroy(gameObject);
+                playerController.playerHP -= missileDamage;
+            }
+            else if (collision.gameObject.GetComponent<Patrol>() == null)
+            {
+                Explode();
+            }
         }
     }
 
 
     //Timer for missile to explode
-    void Timer()
+    IEnumerator Timer()
     {
-        if (Time.time > timer)
-        {
-            Explode();
-        }
+        yield return new WaitForSeconds(timer);
+        Explode();
     }
 
     //Function that the missile follows the player and calls the rotate function
     void Follow()
     {
-        transform.position = Vector2.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
-
-        RotateTowards(player.position);
+        transform.position = Vector2.MoveTowards(transform.position, playerPos.position, speed * Time.deltaTime);
+        RotateTowards(playerPos.position);
     }
-
-    //Explosions function
     void Explode()
     {
-        
-        Destroy(this.gameObject);
-
+        Destroy(gameObject);
     }
-
-
-
-
-
-
-    //Function to rotate the missile towards the player
+    //Rotate the missile towards the player
     private void RotateTowards(Vector2 target)
     {
         var offset = 90f;

@@ -221,7 +221,7 @@ GameObject:
   - component: {fileID: 2878139573336789590}
   m_Layer: 0
   m_Name: Robo
-  m_TagString: Untagged
+  m_TagString: RoboEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -332,7 +332,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d688ec029fb7e04f95cc52de282286b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roboPlacement: 1
+  roboPlacement: 2
   shootDistance: {x: 10, y: 8}
   roboHp: 100
   speed: 6

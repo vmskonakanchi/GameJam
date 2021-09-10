@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-     public enum MyEnum
+public enum MyEnum
 {
     GroundOrPlatform,
     RightWall,
@@ -10,7 +10,7 @@ using UnityEngine.UI;
     LeftWall
 };
 
-public class Patrol : MonoBehaviour 
+public class Patrol : MonoBehaviour
 {
     public MyEnum roboPlacement = new MyEnum();
 
@@ -48,84 +48,86 @@ public class Patrol : MonoBehaviour
 
     private void Update()
     {
-        UpdateHealth();
-        Die();
-        if (roboPlacement == MyEnum.GroundOrPlatform)
+        if (player != null)
         {
-            right = Vector2.right;
-            down = Vector2.down;
-            leftRotation = new Vector3(0, 180, 0);
-            rightRotation = new Vector3(0, 0, 0);
-        }
-        if (roboPlacement == MyEnum.RightWall)
-        {
-            right = Vector2.up;
-            down = Vector2.right;
-            leftRotation = new Vector3(180, 0, 90);
-            rightRotation = new Vector3(0, 0, 90);
-        }
-        if (roboPlacement == MyEnum.Ceiling)
-        {
-            right = Vector2.left;
-            down = Vector2.up;
-            leftRotation = new Vector3(0, 180, 180);
-            rightRotation = new Vector3(0, 0, 180);
-        }
-        if (roboPlacement == MyEnum.LeftWall)
-        {
-            right = Vector2.down;
-            down = Vector2.left;
-            leftRotation = new Vector3(180, 0, 270);
-            rightRotation = new Vector3(0, 0, 270);
-        }
-
-        float playerDistanceX = Mathf.Abs(player.position.x - transform.position.x);
-        float playerDistanceY = Mathf.Abs(player.position.y - transform.position.y);
-
-        // The Raycast
-        RaycastHit2D hit = Physics2D.Linecast(transform.position, player.position, layerMask);
-
-        // If it hits the player
-        if (hit.collider == null && !isShooting && playerDistanceX < shootDistance.x && playerDistanceY < shootDistance.y)
-        {
-            patrolState = false;
-        }
-
-        if (patrolState && !isShooting)
-        {
-            if (movingRight)
+            UpdateHealth();
+            Die();
+            if (roboPlacement == MyEnum.GroundOrPlatform)
             {
-                rb.velocity = speed * right;
+                right = Vector2.right;
+                down = Vector2.down;
+                leftRotation = new Vector3(0, 180, 0);
+                rightRotation = new Vector3(0, 0, 0);
             }
-            else
+            if (roboPlacement == MyEnum.RightWall)
             {
-                rb.velocity = -speed * right;
+                right = Vector2.up;
+                down = Vector2.right;
+                leftRotation = new Vector3(180, 0, 90);
+                rightRotation = new Vector3(0, 0, 90);
             }
-        }
-        else if (!patrolState && !isShooting)
-        {
-            rb.velocity = Vector2.zero;
-            StartCoroutine(Shoot());
-        }
-
-        RaycastHit2D edgeCheck = Physics2D.Raycast(groundDetection.position, down, 0.5f);
-        RaycastHit2D frontCheck = Physics2D.Raycast(groundDetection.position, right, 0.1f);
-
-        if (!edgeCheck.collider || frontCheck)
-        {
-            if(movingRight)
+            if (roboPlacement == MyEnum.Ceiling)
             {
-                transform.eulerAngles = leftRotation;
-                movingRight = false;
+                right = Vector2.left;
+                down = Vector2.up;
+                leftRotation = new Vector3(0, 180, 180);
+                rightRotation = new Vector3(0, 0, 180);
             }
-            else
+            if (roboPlacement == MyEnum.LeftWall)
             {
-                transform.eulerAngles = rightRotation;
-                movingRight = true;
+                right = Vector2.down;
+                down = Vector2.left;
+                leftRotation = new Vector3(180, 0, 270);
+                rightRotation = new Vector3(0, 0, 270);
+            }
+
+            float playerDistanceX = Mathf.Abs(player.position.x - transform.position.x);
+            float playerDistanceY = Mathf.Abs(player.position.y - transform.position.y);
+
+            // The Raycast
+            RaycastHit2D hit = Physics2D.Linecast(transform.position, player.position, layerMask);
+
+            // If it hits the player
+            if (hit.collider == null && !isShooting && playerDistanceX < shootDistance.x && playerDistanceY < shootDistance.y)
+            {
+                patrolState = false;
+            }
+
+            if (patrolState && !isShooting)
+            {
+                if (movingRight)
+                {
+                    rb.velocity = speed * right;
+                }
+                else
+                {
+                    rb.velocity = -speed * right;
+                }
+            }
+            else if (!patrolState && !isShooting)
+            {
+                rb.velocity = Vector2.zero;
+                StartCoroutine(Shoot());
+            }
+
+            RaycastHit2D edgeCheck = Physics2D.Raycast(groundDetection.position, down, 0.5f);
+            RaycastHit2D frontCheck = Physics2D.Raycast(groundDetection.position, right, 0.1f);
+
+            if (!edgeCheck.collider || frontCheck)
+            {
+                if (movingRight)
+                {
+                    transform.eulerAngles = leftRotation;
+                    movingRight = false;
+                }
+                else
+                {
+                    transform.eulerAngles = rightRotation;
+                    movingRight = true;
+                }
             }
         }
     }
-
     IEnumerator Shoot()
     {
         patrolState = false;
@@ -145,7 +147,7 @@ public class Patrol : MonoBehaviour
     {
         if (roboHp == 0)
         {
-            Destroy(this.gameObject, 1f);
+            Destroy(gameObject);
             //Play Death Animation
         }
     }
@@ -154,4 +156,5 @@ public class Patrol : MonoBehaviour
     {
         roboHp -= 12.5f;
     }
+
 }

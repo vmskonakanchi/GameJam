@@ -1,6 +1,6 @@
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         am = GetComponent<Animator>();
-        gravitygun = gameObject.GetComponent<Gravitygun>();       
+        gravitygun = gameObject.GetComponent<Gravitygun>();
     }
 
     void FixedUpdate()
@@ -45,44 +45,42 @@ public class PlayerController : MonoBehaviour
     {
         Move();
         Jump();
-        ChangeGunsAndShoot();
+        ChangeGuns();
         Shoot();
         PlayAnimations();
         Die();
         UpdateUI();
         CheckGround();
-             
     }
 
 
-    void ChangeGunsAndShoot()
+    void ChangeGuns()
     {
-        if(Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             hasgravityGun = false;
             hasEneryGun = true;
             EnergyGun.gameObject.SetActive(true);
-            GravityGun.gameObject.SetActive(false);   
+            GravityGun.gameObject.SetActive(false);
         }
-        else if(Input.GetKeyDown(KeyCode.Alpha2))
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             hasEneryGun = false;
             hasgravityGun = true;
             GravityGun.gameObject.SetActive(true);
-            EnergyGun.gameObject.SetActive(false);           
+            EnergyGun.gameObject.SetActive(false);
         }
     }
     void Shoot()
     {
-        if (Input.GetMouseButtonDown(0) )
+        if (Input.GetMouseButtonDown(0))
         {
             if (hasEneryGun == true)
-            { 
-                GameObject newbullet = Instantiate(bulletPrefab, playerbulletFirePoint.position, Quaternion.identity);
-                newbullet.GetComponent<Rigidbody2D>().velocity = playerbulletFirePoint.rotation * Vector2.right * launchForce;
+            {
+                GameObject newbullet = Instantiate(bulletPrefab, playerbulletFirePoint.position, playerbulletFirePoint.rotation);
+                newbullet.GetComponent<Rigidbody2D>().velocity = playerbulletFirePoint.rotation * Vector2.right * launchForce; /*error here*/
             }
         }
-
     }
     void CheckGround()
     {
@@ -135,7 +133,7 @@ public class PlayerController : MonoBehaviour
         {
             am.SetFloat("Speed", 2);
         }
-        else if (rb.velocity ==  Vector2.up)
+        else if (rb.velocity == Vector2.up)
         {
             am.SetTrigger("Jump");
         }
@@ -150,15 +148,15 @@ public class PlayerController : MonoBehaviour
         slider.value = playerHP;
     }
     void Die()
-    {      
-        if(playerHP == 0 )
+    {
+        if (playerHP == 0)
         {
             Debug.Log("Player Died");
-            Destroy(gameObject, 1f);
-            ShowRestartbuttons();         
+            Destroy(gameObject);
+            ShowRetrybuttons();
         }
     }
-    void ShowRestartbuttons()
+    void ShowRetrybuttons()
     {
         retryButton.gameObject.SetActive(true);
 
