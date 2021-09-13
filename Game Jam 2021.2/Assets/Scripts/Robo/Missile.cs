@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Missile : MonoBehaviour
 {
+    public GameObject explosionFx;
     GameObject player;
     Transform playerPos;
     PlayerController playerController;
@@ -31,6 +32,7 @@ public class Missile : MonoBehaviour
     }
     void FixedUpdate()
     {
+        Debug.Log(timer);
         if (player != null) Follow();
 
     }
@@ -40,12 +42,12 @@ public class Missile : MonoBehaviour
     {
         if (player != null)
         {
-
             if (collision.collider.tag == "Player")
             {
                 Debug.Log("Hit By Robo Missile");
                 Destroy(gameObject);
                 playerController.playerHP -= missileDamage;
+                Explode();
             }
             else if (collision.gameObject.GetComponent<Patrol>() == null)
             {
@@ -70,6 +72,9 @@ public class Missile : MonoBehaviour
     }
     void Explode()
     {
+        GameObject collisionFx = Instantiate(explosionFx, transform.position, transform.rotation);
+        collisionFx.transform.rotation = this.transform.rotation;
+        Destroy(collisionFx, 0.3f);
         Destroy(gameObject);
     }
     //Rotate the missile towards the player

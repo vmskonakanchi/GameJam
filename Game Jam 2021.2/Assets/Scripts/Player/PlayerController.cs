@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     Gravitygun gravitygun;
     [Header("Components Required")]
     public GameObject bulletPrefab;
+    public GameObject muzzleFlsh;
     public Transform playerbulletFirePoint;
     public Transform groundCheckPoint;
     [Space(3f)]
@@ -24,7 +25,12 @@ public class PlayerController : MonoBehaviour
     public bool hasEneryGun = false;
     public GameObject GravityGun;
     public GameObject EnergyGun;
+    Animator energyGun_am;
 
+    bool isA;
+    bool isD;
+    bool isSpace;
+    bool isMouse_0;
     void Start()
     {
         GetComponents();
@@ -32,6 +38,7 @@ public class PlayerController : MonoBehaviour
 
     private void GetComponents()
     {
+        energyGun_am = EnergyGun.GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         am = GetComponent<Animator>();
         gravitygun = gameObject.GetComponent<Gravitygun>();
@@ -39,27 +46,34 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        Move();
+        Jump();
+        CheckGround();
         gravitygun.HitWithRay();
     }
     void Update()
     {
-        Move();
-        Jump();
-        ChangeGuns();
         Shoot();
+        ChangeGuns();
+        GetInput();
         PlayAnimations();
         Die();
         UpdateUI();
-        CheckGround();
     }
 
-
+    void GetInput()
+    {
+        if (Input.GetKey(KeyCode.A)) isA = true; else isA = false;
+        if (Input.GetKey(KeyCode.D)) isD = true; else isD = false;
+        if (Input.GetKeyDown(KeyCode.Space)) isSpace = true; else isSpace = false;
+        if (Input.GetMouseButtonDown(0)) isMouse_0 = true; else isMouse_0 = false;
+    }
     void ChangeGuns()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            hasgravityGun = false;
             hasEneryGun = true;
+            hasgravityGun = false;
             EnergyGun.gameObject.SetActive(true);
             GravityGun.gameObject.SetActive(false);
         }
@@ -70,16 +84,28 @@ public class PlayerController : MonoBehaviour
             GravityGun.gameObject.SetActive(true);
             EnergyGun.gameObject.SetActive(false);
         }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            hasEneryGun = false;
+            hasgravityGun = false;
+            GravityGun.gameObject.SetActive(false);
+            EnergyGun.gameObject.SetActive(false);
+        }
     }
     void Shoot()
     {
-        if (Input.GetMouseButtonDown(0))
+
+        if (hasEneryGun == true)
         {
-            if (hasEneryGun == true)
+            if (isMouse_0 == true)
             {
+                energyGun_am.SetBool("shoot", true);
+                GameObject flsh = Instantiate(muzzleFlsh, playerbulletFirePoint.position, playerbulletFirePoint.rotation);
+                Destroy(flsh, 0.05f);
                 GameObject newbullet = Instantiate(bulletPrefab, playerbulletFirePoint.position, playerbulletFirePoint.rotation);
                 newbullet.GetComponent<Rigidbody2D>().velocity = playerbulletFirePoint.rotation * Vector2.right * launchForce; /*error here*/
             }
+            else energyGun_am.SetBool("shoot", false);
         }
     }
     void CheckGround()
@@ -92,13 +118,13 @@ public class PlayerController : MonoBehaviour
     void Move()
     {
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-        if (Input.GetKey(KeyCode.A))
+        if (isA == true)
         {
             am.SetFloat("Speed", 2);
             rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
             transform.eulerAngles = new Vector2(0, 180);
         }
-        else if (Input.GetKey(KeyCode.D))
+        else if (isD == true)
         {
             am.SetFloat("Speed", 2);
             rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
@@ -112,16 +138,11 @@ public class PlayerController : MonoBehaviour
     }
     void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isOnGround == true)
+        if (isSpace == true && isOnGround == true)
         {
             isOnGround = false;
             rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
         }
-        else
-        {
-            return;
-        }
-
     }
     void PlayAnimations()
     {

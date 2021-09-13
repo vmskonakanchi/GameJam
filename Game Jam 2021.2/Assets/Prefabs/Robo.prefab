@@ -58,7 +58,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!114 &9156681859723852431
 MonoBehaviour:
@@ -332,7 +332,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d688ec029fb7e04f95cc52de282286b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roboPlacement: 2
+  roboPlacement: 0
   shootDistance: {x: 10, y: 8}
   roboHp: 100
   speed: 6

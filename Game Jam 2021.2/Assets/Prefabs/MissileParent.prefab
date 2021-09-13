@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4616a9eef7a9c7e498fd5ea40886743a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosionFx: {fileID: 4473730631776656775, guid: 733a4c05375a57c42a3a213e1ed3b955, type: 3}
   missileDamage: 10
 --- !u!50 &5735668437212797320
 Rigidbody2D:
@@ -165,7 +166,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 15
   m_Sprite: {fileID: 3440765701506727948, guid: 956db679960f36b43b933217c87ca383, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
