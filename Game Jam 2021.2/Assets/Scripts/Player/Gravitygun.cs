@@ -41,11 +41,7 @@ public class Gravitygun : MonoBehaviour
             }
 
         }
-        else
-        {
-            if (player.hasgravityGun == true)
-                gravityGun_am.SetBool("shoot", false);
-        }
+        else if (player.hasgravityGun == true) gravityGun_am.SetBool("shoot", false);
         Debug.DrawRay(player.playerbulletFirePoint.position, correctPos, Color.green);
     }
 }

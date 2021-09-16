@@ -144,9 +144,10 @@ public class Patrol : MonoBehaviour
         slider.value = roboHp;
     }
     void Die()
-    {
+    {       
         if (roboHp == 0)
         {
+            player.GetComponent<Ammo>().bulletCount += 5;
             Destroy(gameObject);
             //Play Death Animation
         }

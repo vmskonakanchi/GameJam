@@ -16,6 +16,7 @@ public class SuitGuyAI : MonoBehaviour
     private Rigidbody2D rb;
     private Animator anim;
     private Slider slider;
+    Ammo ammo;
 
     [SerializeField] private Transform firePoint;
     [SerializeField] private GameObject bullet;
@@ -46,6 +47,7 @@ public class SuitGuyAI : MonoBehaviour
     {
         layerMask = LayerMask.GetMask("Obstacle");
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        ammo = player.GetComponent<Ammo>();
 
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
@@ -223,53 +225,54 @@ public class SuitGuyAI : MonoBehaviour
                 rb.velocity = Vector2.zero;
                 canMove = true;
             }
-
             // Stop movement when close to target position to avoid gittering
-            if (Mathf.Abs(targetPosition - transform.position.x) < 0.1f) rb.velocity = new Vector2(0, rb.velocity.y);
+            float gitteringDist = Mathf.Abs(targetPosition - transform.position.x);
+            if (gitteringDist < 0.1f) rb.velocity = new Vector2(0, rb.velocity.y);
         }
     }
 
-        void Die()
+    void Die()
+    {    
+        if (enemyHP == 0)
         {
-            if (enemyHP == 0)
-            {
-                Destroy(this.gameObject, 1f);
-                Debug.Log(" Enemy Died");
-                //Play Death Animation
-            }
+            Destroy(gameObject, 0.1f);
+            Debug.Log(" Enemy Died");
+            //Play Death Animation
         }
-        void UpdateHealth()
-        {
-            slider.value = enemyHP;
-        }
-        public void Damage()
-        {
-            enemyHP -= 10;
-        }
+    }
 
-        // Groundcheck from EnemyAI_GC script
-        public void GroundCheck()
-        {
-            isGrounded = true;
-        }
-        public void GroundUncheck()
-        {
-            isGrounded = false;
-        }
+    void UpdateHealth()
+    {
+        slider.value = enemyHP;
+    }
+    public void Damage()
+    {
+        enemyHP -= 10;
+    }
 
-        // Coroutine with shoot code
-        private IEnumerator Shoot()
-        {
-            yield return new WaitForSeconds(0.36f);
-            anim.Play("Enemy Shooting");
-            //Debug.Log("Shoot");
-            GameObject b = Instantiate(bullet, firePoint.position, Quaternion.identity);
-            GameObject mf = Instantiate(muzzleFlash, firePoint);
-            b.transform.GetComponent<Rigidbody2D>().velocity = new Vector2(bulletSpeed * movingDirection, 0);
-            Destroy(mf, 0.1f);
-            isShooting = false;
-            yield return new WaitForSeconds(shootingInterval - 0.36f);
-            canShoot = true;
-        }
-     
+    // Groundcheck from EnemyAI_GC script
+    public void GroundCheck()
+    {
+        isGrounded = true;
+    }
+    public void GroundUncheck()
+    {
+        isGrounded = false;
+    }
+
+    // Coroutine with shoot code
+    private IEnumerator Shoot()
+    {
+        yield return new WaitForSeconds(0.36f);
+        anim.Play("Enemy Shooting");
+        //Debug.Log("Shoot");
+        GameObject b = Instantiate(bullet, firePoint.position, Quaternion.identity);
+        GameObject mf = Instantiate(muzzleFlash, firePoint);
+        b.transform.GetComponent<Rigidbody2D>().velocity = new Vector2(bulletSpeed * movingDirection, 0);
+        Destroy(mf, 0.1f);
+        isShooting = false;
+        yield return new WaitForSeconds(shootingInterval - 0.36f);
+        canShoot = true;
+    }
+
 }

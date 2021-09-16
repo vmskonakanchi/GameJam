@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class Missile : MonoBehaviour
 {
+    GameObject enymy;
+    SuitGuyAI enemy;
     public GameObject explosionFx;
     GameObject player;
     Transform playerPos;
@@ -12,6 +14,9 @@ public class Missile : MonoBehaviour
     Rigidbody2D rb;
     float timer = 2f;
     public int missileDamage = 10;
+
+    Collider2D collider1;
+    Collider2D collider2;
     void Start()
     {
         GetComponents();
@@ -19,10 +24,15 @@ public class Missile : MonoBehaviour
 
     private void GetComponents()
     {
+        enymy = GameObject.FindGameObjectWithTag("Enemy");
+        if(enymy != null) enemy = FindObjectOfType<SuitGuyAI>();
         player = GameObject.FindGameObjectWithTag("Player");
         if (player != null) playerPos = player.transform;
         if (player != null) playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         rb = GetComponent<Rigidbody2D>();
+        collider1 = this.GetComponent<Collider2D>();
+        if(enymy != null)collider2 = enemy.GetComponent<Collider2D>();
+
     }
 
     private void Update()
@@ -32,9 +42,8 @@ public class Missile : MonoBehaviour
     }
     void FixedUpdate()
     {
-        Debug.Log(timer);
+        if (enymy != null) Physics2D.IgnoreCollision(collider1, collider2);
         if (player != null) Follow();
-
     }
 
     //Collision check
@@ -42,8 +51,9 @@ public class Missile : MonoBehaviour
     {
         if (player != null)
         {
-            if (collision.collider.tag == "Player")
+            if (collision.collider.CompareTag("Player"))
             {
+                collision.collider.GetComponent<Animator>().Play("Edward Hurt");
                 Debug.Log("Hit By Robo Missile");
                 Destroy(gameObject);
                 playerController.playerHP -= missileDamage;
@@ -53,6 +63,13 @@ public class Missile : MonoBehaviour
             {
                 Explode();
             }
+        }
+    }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.collider.CompareTag("Player"))
+        {
+            collision.collider.GetComponent<Animator>().SetBool("Hurt", false);
         }
     }
 
@@ -73,7 +90,7 @@ public class Missile : MonoBehaviour
     void Explode()
     {
         GameObject collisionFx = Instantiate(explosionFx, transform.position, transform.rotation);
-        collisionFx.transform.rotation = this.transform.rotation;
+        collisionFx.transform.rotation = transform.rotation;
         Destroy(collisionFx, 0.3f);
         Destroy(gameObject);
     }
