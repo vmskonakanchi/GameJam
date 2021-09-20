@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class Missile : MonoBehaviour
 {
-    private GameObject enymy;
     private SuitGuyAI enemy;
     public GameObject explosionFx;
     private GameObject player;
@@ -30,7 +29,7 @@ public class Missile : MonoBehaviour
         if (player != null) playerPos = player.transform;
         if (player != null) playerController = player.GetComponent<PlayerController>();
         collider1 = this.GetComponent<Collider2D>();
-        if (enymy != null) collider2 = enemy.GetComponent<Collider2D>();
+        if (enemy != null) collider2 = enemy.GetComponent<Collider2D>();
         collider3 = FindObjectOfType<Patrol>().GetComponent<Collider2D>();
     }
 
@@ -41,8 +40,8 @@ public class Missile : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (enemy != null) Physics2D.IgnoreCollision(collider1, collider2);
         if (collider3 != null) Physics2D.IgnoreCollision(collider1, collider3);
-        if (enymy != null) Physics2D.IgnoreCollision(collider1, collider2);
         if (player != null) Follow();
     }
 
@@ -58,7 +57,7 @@ public class Missile : MonoBehaviour
                 playerController.playerHP -= missileDamage;
                 Explode();
             }
-            else if (collision.gameObject.GetComponent<Patrol>() == null)
+            else if (collision.collider.GetComponent<Patrol>() == null)
             {
                 Explode();
             }

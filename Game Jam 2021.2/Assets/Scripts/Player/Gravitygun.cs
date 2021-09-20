@@ -27,6 +27,7 @@ public class Gravitygun : MonoBehaviour
 
         if (isMouse_1 && player.GravityGun.activeSelf == true)
         {
+            player.lasershootSound.Play();
             gravityGun_am.SetBool("shoot", true);
             player.hasgravityGun = true;
             hit2d = Physics2D.Raycast(player.playerbulletFirePoint.position, correctPos, raycastDist);

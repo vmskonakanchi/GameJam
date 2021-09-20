@@ -6,7 +6,12 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
     private GameObject[] enemy;
-    public AudioSource jumpSound;
+    [Header("Sounds")]
+    [SerializeField] AudioSource jumpSound;
+    [SerializeField] AudioSource shootSound;
+    public AudioSource lasershootSound;
+    [SerializeField] AudioSource ammoaddSound;
+    [Space(1f)]
     private Rigidbody2D rb;
     private Animator am;
     private SpriteRenderer sp;
@@ -207,10 +212,8 @@ public class PlayerController : MonoBehaviour
 
     private void PlaySound()
     {
-        if (isSpace == true)
-        {
-            jumpSound.Play();
-        }
+        if(EnergyGun.gameObject.activeSelf == true)if(canFire == true) if (isMouse_0) shootSound.Play();
+        if(isOnGround == true) if (isSpace) jumpSound.Play();
     }
 
     private void PlayAnimations()
@@ -261,6 +264,7 @@ public class PlayerController : MonoBehaviour
                 {
                     if (g.GetComponent<SuitGuyAI>().enemyHP == 0)
                     {
+                        ammoaddSound.Play();
                         bulletCount += 5;
                     }
                 }
@@ -268,6 +272,7 @@ public class PlayerController : MonoBehaviour
                 {
                     if (g.GetComponent<Patrol>().roboHp == 0)
                     {
+                        ammoaddSound.Play();
                         bulletCount += 10;
                     }
                 }

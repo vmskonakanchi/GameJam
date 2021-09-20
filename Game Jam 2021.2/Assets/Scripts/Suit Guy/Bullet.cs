@@ -1,6 +1,17 @@
 using UnityEngine;
 public class Bullet : MonoBehaviour
-{ 
+{
+    Collider2D bullet;
+    Collider2D robo;
+    private void Start()
+    {
+        bullet = this.GetComponent<Collider2D>();
+        robo = FindObjectOfType<Patrol>().GetComponent<Collider2D>();
+    }
+    private void FixedUpdate()
+    {
+        Physics2D.IgnoreCollision(bullet, robo);
+    }
     public void OnTriggerEnter2D(Collider2D col)
     {
         if (col.CompareTag("Player"))

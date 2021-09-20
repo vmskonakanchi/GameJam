@@ -142,17 +142,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: Suit Guy
       objectReference: {fileID: 0}
+    - target: {fileID: 2769923134857295939, guid: ee713b00b730cb948b89cafaa7451cd9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2769923134857295964, guid: ee713b00b730cb948b89cafaa7451cd9, type: 3}
+      propertyPath: shooting_Range.x
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2769923134857295966, guid: ee713b00b730cb948b89cafaa7451cd9, type: 3}
       propertyPath: m_RootOrder
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 2769923134857295966, guid: ee713b00b730cb948b89cafaa7451cd9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 41.92
+      value: 25.77
       objectReference: {fileID: 0}
     - target: {fileID: 2769923134857295966, guid: ee713b00b730cb948b89cafaa7451cd9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.69
+      value: 8.26
       objectReference: {fileID: 0}
     - target: {fileID: 2769923134857295966, guid: ee713b00b730cb948b89cafaa7451cd9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -64811,6 +64819,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Robo (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7118647845284523884, guid: e3d3caee60a56674cbe16e3227aae393, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7445198026077656835, guid: e3d3caee60a56674cbe16e3227aae393, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -64828,6 +64840,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2320911433963082017, guid: cc2a0c8df0a8aab4eba5f9ac146e075b, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4693272314958759036, guid: cc2a0c8df0a8aab4eba5f9ac146e075b, type: 3}
       propertyPath: m_Name
       value: Edward
@@ -64838,11 +64854,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5402179496844688832, guid: cc2a0c8df0a8aab4eba5f9ac146e075b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -11.8
+      value: -14.91
       objectReference: {fileID: 0}
     - target: {fileID: 5402179496844688832, guid: cc2a0c8df0a8aab4eba5f9ac146e075b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.6
+      value: 6.33
       objectReference: {fileID: 0}
     - target: {fileID: 5402179496844688832, guid: cc2a0c8df0a8aab4eba5f9ac146e075b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -65161,6 +65177,10 @@ PrefabInstance:
     - target: {fileID: 7118647845284523884, guid: e3d3caee60a56674cbe16e3227aae393, type: 3}
       propertyPath: m_Name
       value: Robo (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7118647845284523884, guid: e3d3caee60a56674cbe16e3227aae393, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7118647845284523885, guid: e3d3caee60a56674cbe16e3227aae393, type: 3}
       propertyPath: m_SortingOrder
@@ -69571,6 +69591,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Suit Guy (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 2769923134857295939, guid: ee713b00b730cb948b89cafaa7451cd9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2769923134857295966, guid: ee713b00b730cb948b89cafaa7451cd9, type: 3}
       propertyPath: m_RootOrder
       value: 17
@@ -69675,6 +69699,10 @@ PrefabInstance:
     - target: {fileID: 7118647845284523884, guid: e3d3caee60a56674cbe16e3227aae393, type: 3}
       propertyPath: m_Name
       value: Robo (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7118647845284523884, guid: e3d3caee60a56674cbe16e3227aae393, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7445198026077656835, guid: e3d3caee60a56674cbe16e3227aae393, type: 3}
       propertyPath: m_AnchorMax.x
@@ -69812,6 +69840,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Suit Guy (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2769923134857295939, guid: ee713b00b730cb948b89cafaa7451cd9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2769923134857295966, guid: ee713b00b730cb948b89cafaa7451cd9, type: 3}
       propertyPath: m_RootOrder
       value: 15
@@ -69870,6 +69902,7 @@ GameObject:
   - component: {fileID: 1084532869}
   - component: {fileID: 1084532868}
   - component: {fileID: 1084532871}
+  - component: {fileID: 1084532872}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -69955,6 +69988,102 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offset: {x: 5, y: 2.61, z: -10}
+--- !u!82 &1084532872
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1084532867}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 9aa784004eb40c54da897ded0a020f08, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 0.1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1115471244
 GameObject:
   m_ObjectHideFlags: 0
@@ -70271,7 +70400,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1169409726
 RectTransform:
   m_ObjectHideFlags: 0
@@ -70490,6 +70619,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Robo (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 7118647845284523884, guid: e3d3caee60a56674cbe16e3227aae393, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7445198026077656835, guid: e3d3caee60a56674cbe16e3227aae393, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -70513,11 +70646,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7118647845284523794, guid: e3d3caee60a56674cbe16e3227aae393, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 22.57
+      value: 30.19
       objectReference: {fileID: 0}
     - target: {fileID: 7118647845284523794, guid: e3d3caee60a56674cbe16e3227aae393, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.96
+      value: 6.95
       objectReference: {fileID: 0}
     - target: {fileID: 7118647845284523794, guid: e3d3caee60a56674cbe16e3227aae393, type: 3}
       propertyPath: m_LocalPosition.z
@@ -71141,6 +71274,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Key
       objectReference: {fileID: 0}
+    - target: {fileID: 3085329640484301734, guid: 7b32c9c34a834304e858b42663b66697, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b32c9c34a834304e858b42663b66697, type: 3}
 --- !u!1001 &2055901742
@@ -71314,6 +71451,10 @@ PrefabInstance:
     - target: {fileID: 7118647845284523884, guid: e3d3caee60a56674cbe16e3227aae393, type: 3}
       propertyPath: m_Name
       value: Robo (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7118647845284523884, guid: e3d3caee60a56674cbe16e3227aae393, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7445198026077656835, guid: e3d3caee60a56674cbe16e3227aae393, type: 3}
       propertyPath: m_AnchorMax.x
