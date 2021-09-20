@@ -433,7 +433,6 @@ GameObject:
   - component: {fileID: 6700662352759024508}
   - component: {fileID: 5734569137279635497}
   - component: {fileID: 9219690763349572719}
-  - component: {fileID: 893729000}
   - component: {fileID: 8916065395296013030}
   - component: {fileID: 916372751}
   m_Layer: 0
@@ -577,6 +576,7 @@ MonoBehaviour:
   jumpSpeed: 10
   laddercheckDist: 4
   playerHP: 100
+  bulletCount: 15
   launchForce: 20
   isOnGround: 0
   hasgravityGun: 0
@@ -598,19 +598,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   raycastDist: 10
---- !u!114 &893729000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4693272314958759036}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67df0ce4ad5ee5a46a0faafb779b5a6a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletCount: 15
 --- !u!82 &8916065395296013030
 AudioSource:
   m_ObjectHideFlags: 0
@@ -716,7 +703,7 @@ CapsuleCollider2D:
   m_GameObject: {fileID: 4693272314958759036}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: f66569c1170d74e448dd8291fe14a379, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0

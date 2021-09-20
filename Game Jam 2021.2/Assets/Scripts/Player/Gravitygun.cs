@@ -2,16 +2,22 @@ using UnityEngine;
 
 public class Gravitygun : MonoBehaviour
 {
-    PlayerController player;
-    [SerializeField] float raycastDist;
-    RaycastHit2D hit2d;
-    Vector3 mousePos;
-    Vector3 correctPos;
-    Animator gravityGun_am;
-    void Start()
+    private PlayerController player;
+    [SerializeField] private float raycastDist;
+    private RaycastHit2D hit2d;
+    private Vector3 mousePos;
+    private Vector3 correctPos;
+    private Animator gravityGun_am;
+    bool isMouse_1 = false;
+
+    private void Start()
     {
         player = gameObject.GetComponent<PlayerController>();
         if (player != null) gravityGun_am = player.GravityGun.GetComponent<Animator>();
+    }
+    private void Update()
+    {
+        isMouse_1 = Input.GetMouseButtonDown(1);
     }
 
     public void HitWithRay()
@@ -19,7 +25,7 @@ public class Gravitygun : MonoBehaviour
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         correctPos = (mousePos - transform.position).normalized;
 
-        if (Input.GetMouseButton(1) && player.GravityGun.activeSelf == true)
+        if (isMouse_1 && player.GravityGun.activeSelf == true)
         {
             gravityGun_am.SetBool("shoot", true);
             player.hasgravityGun = true;
@@ -39,7 +45,6 @@ public class Gravitygun : MonoBehaviour
                     }
                 }
             }
-
         }
         else if (player.hasgravityGun == true) gravityGun_am.SetBool("shoot", false);
         Debug.DrawRay(player.playerbulletFirePoint.position, correctPos, Color.green);

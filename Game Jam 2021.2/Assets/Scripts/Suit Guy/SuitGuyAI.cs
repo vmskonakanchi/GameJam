@@ -16,7 +16,6 @@ public class SuitGuyAI : MonoBehaviour
     private Rigidbody2D rb;
     private Animator anim;
     private Slider slider;
-    Ammo ammo;
 
     [SerializeField] private Transform firePoint;
     [SerializeField] private GameObject bullet;
@@ -41,13 +40,12 @@ public class SuitGuyAI : MonoBehaviour
     private float targetPosition;
     private int movingDirection;
 
-    LayerMask layerMask;
+    private LayerMask layerMask;
 
     private void Start()
     {
         layerMask = LayerMask.GetMask("Obstacle");
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        ammo = player.GetComponent<Ammo>();
 
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
@@ -104,13 +102,11 @@ public class SuitGuyAI : MonoBehaviour
                     chase_State = true;
                     shooting_State = false;
                 }
-
                 else if (playerDistanceX < shooting_Range.x && playerDistanceY < shooting_Range.y)
                 {
                     chase_State = false;
                     shooting_State = true;
                 }
-
                 else
                 {
                     chase_State = false;
@@ -130,7 +126,6 @@ public class SuitGuyAI : MonoBehaviour
                     shooting_State = false;
                     canMove = false;
                 }
-                // Debug.Log("Not Spotted");
             }
             else
             {
@@ -139,7 +134,6 @@ public class SuitGuyAI : MonoBehaviour
                 {
                     targetPosition = player.position.x;
                 }
-                //Debug.Log("Spotted");
             }
 
             // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
@@ -171,7 +165,6 @@ public class SuitGuyAI : MonoBehaviour
                     movingDirection = 1;
                     transform.rotation = Quaternion.Euler(0, 0, 0);
                 }
-
                 else if (targetPosition - transform.position.x < 0 && !startFacingLeft)
                 {
                     movingDirection = -1;
@@ -197,7 +190,6 @@ public class SuitGuyAI : MonoBehaviour
                     movingDirection = 1;
                     transform.rotation = Quaternion.Euler(0, 0, 0);
                 }
-
                 else if (player.position.x - transform.position.x < 0)
                 {
                     movingDirection = -1;
@@ -231,20 +223,20 @@ public class SuitGuyAI : MonoBehaviour
         }
     }
 
-    void Die()
-    {    
+    private void Die()
+    {
         if (enemyHP == 0)
         {
-            Destroy(gameObject, 0.1f);
-            Debug.Log(" Enemy Died");
+            Destroy(gameObject);
             //Play Death Animation
         }
     }
 
-    void UpdateHealth()
+    private void UpdateHealth()
     {
         slider.value = enemyHP;
     }
+
     public void Damage()
     {
         enemyHP -= 10;
@@ -255,6 +247,7 @@ public class SuitGuyAI : MonoBehaviour
     {
         isGrounded = true;
     }
+
     public void GroundUncheck()
     {
         isGrounded = false;
@@ -265,7 +258,6 @@ public class SuitGuyAI : MonoBehaviour
     {
         yield return new WaitForSeconds(0.36f);
         anim.Play("Enemy Shooting");
-        //Debug.Log("Shoot");
         GameObject b = Instantiate(bullet, firePoint.position, Quaternion.identity);
         GameObject mf = Instantiate(muzzleFlash, firePoint);
         b.transform.GetComponent<Rigidbody2D>().velocity = new Vector2(bulletSpeed * movingDirection, 0);
@@ -274,5 +266,4 @@ public class SuitGuyAI : MonoBehaviour
         yield return new WaitForSeconds(shootingInterval - 0.36f);
         canShoot = true;
     }
-
 }

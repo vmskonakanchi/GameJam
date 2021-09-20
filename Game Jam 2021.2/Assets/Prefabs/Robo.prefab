@@ -221,7 +221,7 @@ GameObject:
   - component: {fileID: 2878139573336789590}
   m_Layer: 0
   m_Name: Robo
-  m_TagString: RoboEnemy
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -282,7 +282,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 12
   m_Sprite: {fileID: -968581121891839678, guid: b7515b20decddbf4991d7eecf6c65aa8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

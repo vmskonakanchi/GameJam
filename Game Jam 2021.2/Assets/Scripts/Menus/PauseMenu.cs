@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -58,5 +57,11 @@ public class PauseMenu : MonoBehaviour
             pauseMenu.SetActive(false);
             Time.timeScale = 1;
         }
+    }
+
+    public void Retry()
+    {
+        Scene presentScene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(presentScene.name);
     }
 }

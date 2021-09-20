@@ -1,72 +1,69 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
+    private GameObject[] enemy;
     public AudioSource jumpSound;
-    Rigidbody2D rb;
-    Animator am;
-    SpriteRenderer sp;
+    private Rigidbody2D rb;
+    private Animator am;
+    private SpriteRenderer sp;
     public Button retryButton;
     public Slider slider;
     public TextMeshProUGUI scoreText;
-    Gravitygun gravitygun;
+    private Gravitygun gravitygun;
+
     [Header("Components Required")]
     public GameObject bulletPrefab;
+
     public GameObject muzzleFlsh;
     public Transform playerbulletFirePoint;
     public Transform groundCheckPoint;
     public Transform LadderCheck;
+
     [Space(3f)]
-    [SerializeField] float moveSpeed;
-    [SerializeField] float jumpSpeed;
-    [SerializeField] float laddercheckDist;
+    [SerializeField] private float moveSpeed;
+
+    [SerializeField] private float jumpSpeed;
+    [SerializeField] private float laddercheckDist;
     public int playerHP = 100;
+    public int bulletCount = 15;
     [SerializeField] public float launchForce;
-    [SerializeField] bool isOnGround;
-    float groundHitRadius = 0.08f;
+    [SerializeField] private bool isOnGround;
+    private float groundHitRadius = 0.08f;
     public bool hasgravityGun;
     public bool hasEneryGun = false;
     public GameObject GravityGun;
     public GameObject EnergyGun;
-    Animator energyGun_am;
-    Ammo ammo;
+    private Animator energyGun_am;
     public bool canFire;
     public bool hasKey = false;
-    LayerMask whatisLadder;
+    private LayerMask whatisLadder;
 
-    bool isA;
-    bool isD;
-    bool isW;
-    bool isSpace;
-    bool isMouse_0;
-    void Start()
+    private bool isA = false;
+    private bool isD = false;
+    private bool isW = false;
+    private bool isSpace = false;
+    private bool isMouse_0 = false;
+
+    private void Start()
     {
         GetComponents();
     }
-    private void GetComponents()
-    {
-        whatisLadder = LayerMask.GetMask("Ladder");
-        ammo = FindObjectOfType<Ammo>();
-        energyGun_am = EnergyGun.GetComponent<Animator>();
-        rb = GetComponent<Rigidbody2D>();
-        am = GetComponent<Animator>();
-        gravitygun = gameObject.GetComponent<Gravitygun>();
-        sp = GetComponent<SpriteRenderer>();
-    }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         ClimbLadders();
         Move();
-        Jump();
         CheckGround();
-        gravitygun.HitWithRay();
     }
-    void Update()
-    {       
+
+    private void Update()
+    {
+        Jump();
+        gravitygun.HitWithRay();
         GetInput();
         PlaySound();
         CountAmmo();
@@ -75,17 +72,30 @@ public class PlayerController : MonoBehaviour
         PlayAnimations();
         Die();
         UpdateUI();
+        AddBulletsOnEnemyDeath();
     }
 
-    void GetInput()
+    private void GetComponents()
     {
-        if (Input.GetKey(KeyCode.A)) isA = true; else isA = false;
-        if (Input.GetKey(KeyCode.D)) isD = true; else isD = false;
-        if (Input.GetKey(KeyCode.W)) isW = true; else isW = false;
-        if (Input.GetKeyDown(KeyCode.Space)) isSpace = true; else isSpace = false;
-        if (Input.GetMouseButtonDown(0)) isMouse_0 = true; else isMouse_0 = false;
+        enemy = GameObject.FindGameObjectsWithTag("Enemy");
+        whatisLadder = LayerMask.GetMask("Ladder");
+        energyGun_am = EnergyGun.GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
+        am = GetComponent<Animator>();
+        gravitygun = gameObject.GetComponent<Gravitygun>();
+        sp = GetComponent<SpriteRenderer>();
     }
-    void ChangeGuns()
+
+    private void GetInput()
+    {
+        isA = Input.GetKey(KeyCode.A);
+        isD = Input.GetKey(KeyCode.D);
+        isW = Input.GetKey(KeyCode.W);
+        isSpace = Input.GetKeyDown(KeyCode.Space);
+        isMouse_0 = Input.GetMouseButtonDown(0);
+    }
+
+    private void ChangeGuns()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
@@ -109,15 +119,16 @@ public class PlayerController : MonoBehaviour
             EnergyGun.gameObject.SetActive(false);
         }
     }
-    void Shoot()
-    {   
+
+    private void Shoot()
+    {
         if (hasEneryGun == true)
         {
             if (isMouse_0 == true)
             {
                 if (canFire == true)
                 {
-                    ammo.bulletCount--;
+                    bulletCount--;
                     energyGun_am.SetBool("shoot", true);
                     GameObject flsh = Instantiate(muzzleFlsh, playerbulletFirePoint.position, playerbulletFirePoint.rotation);
                     Destroy(flsh, 0.05f);
@@ -128,14 +139,15 @@ public class PlayerController : MonoBehaviour
             else energyGun_am.SetBool("shoot", false);
         }
     }
-    void CheckGround()
+
+    private void CheckGround()
     {
         Collider2D groundInfo = Physics2D.OverlapCircle(groundCheckPoint.position, groundHitRadius);
         if (groundInfo == true) isOnGround = true;
         else isOnGround = false;
     }
 
-    void Move()
+    private void Move()
     {
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         if (isA == true)
@@ -156,21 +168,22 @@ public class PlayerController : MonoBehaviour
             rb.velocity = new Vector2(0, rb.velocity.y);
         }
     }
-    void Jump()
+
+    private void Jump()
     {
-        if (isSpace == true && isOnGround == true)
+        if (isSpace && isOnGround == true)
         {
+            isSpace = false;
             isOnGround = false;
             rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
         }
     }
 
-    void ClimbLadders()
+    private void ClimbLadders()
     {
         RaycastHit2D ladderHit = Physics2D.Raycast(LadderCheck.position, Vector2.up, laddercheckDist, whatisLadder);
         if (ladderHit.collider == true)
         {
-            Debug.Log("Press W To Climb Ladder");         
             if (isW == true)
             {
                 rb.gravityScale = 0;
@@ -182,23 +195,25 @@ public class PlayerController : MonoBehaviour
             rb.gravityScale = 1;
         }
     }
-    void CountAmmo()
+
+    private void CountAmmo()
     {
-        if (ammo.bulletCount > 0)
+        if (bulletCount > 0)
         {
             canFire = true;
         }
-        else if (ammo.bulletCount == 0) canFire = false;
+        else if (bulletCount == 0) canFire = false;
     }
-    void PlaySound()
+
+    private void PlaySound()
     {
         if (isSpace == true)
         {
             jumpSound.Play();
         }
-       // Debug.Log(jumpSound.isPlaying);
     }
-    void PlayAnimations()
+
+    private void PlayAnimations()
     {
         if (rb.velocity == Vector2.zero)
         {
@@ -210,42 +225,68 @@ public class PlayerController : MonoBehaviour
         }
         else if (rb.velocity == Vector2.up)
         {
-            am.SetTrigger("Jump");            
+            am.SetTrigger("Jump");
         }
-       
     }
+
     public void BulletDamage()
     {
         playerHP -= 5;
-        Debug.Log("Hit with bullet by enemy");
     }
-    void UpdateUI()
+
+    private void UpdateUI()
     {
-        scoreText.text = ammo.bulletCount.ToString();
+        scoreText.text = bulletCount.ToString();
         slider.value = playerHP;
     }
-    void Die()
+
+    private void Die()
     {
         if (playerHP == 0)
         {
             am.Play("Edward Death");
-            Debug.Log("Player Died");
             Destroy(gameObject, 0.3f);
             ShowRetrybuttons();
         }
     }
-    void ShowRetrybuttons()
+
+    private void AddBulletsOnEnemyDeath()
+    {
+        if (enemy == null) return;
+        foreach (GameObject g in enemy)
+        {
+            if (g != null)
+            {
+                if (g.GetComponent<SuitGuyAI>() != null)
+                {
+                    if (g.GetComponent<SuitGuyAI>().enemyHP == 0)
+                    {
+                        bulletCount += 5;
+                    }
+                }
+                if (g.GetComponent<Patrol>() != null)
+                {
+                    if (g.GetComponent<Patrol>().roboHp == 0)
+                    {
+                        bulletCount += 10;
+                    }
+                }
+            }
+        }
+    }
+
+    private void ShowRetrybuttons()
     {
         retryButton.gameObject.SetActive(true);
-
     }
+
     public void RetryButton()
-    {
+    { 
         Scene presentScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(presentScene.name);
     }
 
-    void OnDrawGizmosSelected()
+    private void OnDrawGizmosSelected()
     {
         Gizmos.DrawRay(LadderCheck.position, Vector2.up);
         Gizmos.DrawWireSphere(groundCheckPoint.position, groundHitRadius);

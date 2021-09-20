@@ -3,45 +3,45 @@ using UnityEngine;
 
 public class Missile : MonoBehaviour
 {
-    GameObject enymy;
-    SuitGuyAI enemy;
+    private GameObject enymy;
+    private SuitGuyAI enemy;
     public GameObject explosionFx;
-    GameObject player;
-    Transform playerPos;
-    PlayerController playerController;
+    private GameObject player;
+    private Transform playerPos;
+    private PlayerController playerController;
 
-    float speed = 8f;
-    Rigidbody2D rb;
-    float timer = 2f;
+    private float speed = 8f;
+    private float timer = 2f;
     public int missileDamage = 10;
 
-    Collider2D collider1;
-    Collider2D collider2;
-    void Start()
+    private Collider2D collider1;
+    private Collider2D collider2;
+    private Collider2D collider3;
+
+    private void Start()
     {
         GetComponents();
     }
 
     private void GetComponents()
     {
-        enymy = GameObject.FindGameObjectWithTag("Enemy");
-        if(enymy != null) enemy = FindObjectOfType<SuitGuyAI>();
+        enemy = FindObjectOfType<SuitGuyAI>();
         player = GameObject.FindGameObjectWithTag("Player");
         if (player != null) playerPos = player.transform;
-        if (player != null) playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-        rb = GetComponent<Rigidbody2D>();
+        if (player != null) playerController = player.GetComponent<PlayerController>();
         collider1 = this.GetComponent<Collider2D>();
-        if(enymy != null)collider2 = enemy.GetComponent<Collider2D>();
-
+        if (enymy != null) collider2 = enemy.GetComponent<Collider2D>();
+        collider3 = FindObjectOfType<Patrol>().GetComponent<Collider2D>();
     }
 
     private void Update()
     {
         if (player != null) StartCoroutine(Timer());
-
     }
-    void FixedUpdate()
+
+    private void FixedUpdate()
     {
+        if (collider3 != null) Physics2D.IgnoreCollision(collider1, collider3);
         if (enymy != null) Physics2D.IgnoreCollision(collider1, collider2);
         if (player != null) Follow();
     }
@@ -54,7 +54,6 @@ public class Missile : MonoBehaviour
             if (collision.collider.CompareTag("Player"))
             {
                 collision.collider.GetComponent<Animator>().Play("Edward Hurt");
-                Debug.Log("Hit By Robo Missile");
                 Destroy(gameObject);
                 playerController.playerHP -= missileDamage;
                 Explode();
@@ -65,6 +64,7 @@ public class Missile : MonoBehaviour
             }
         }
     }
+
     private void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.collider.CompareTag("Player"))
@@ -73,27 +73,27 @@ public class Missile : MonoBehaviour
         }
     }
 
-
     //Timer for missile to explode
-    IEnumerator Timer()
+    private IEnumerator Timer()
     {
         yield return new WaitForSeconds(timer);
         Explode();
     }
 
-    //Function that the missile follows the player and calls the rotate function
-    void Follow()
+    //Missile follows the player and calls the rotate function
+    private void Follow()
     {
         transform.position = Vector2.MoveTowards(transform.position, playerPos.position, speed * Time.deltaTime);
         RotateTowards(playerPos.position);
     }
-    void Explode()
+
+    private void Explode()
     {
         GameObject collisionFx = Instantiate(explosionFx, transform.position, transform.rotation);
-        collisionFx.transform.rotation = transform.rotation;
         Destroy(collisionFx, 0.3f);
         Destroy(gameObject);
     }
+
     //Rotate the missile towards the player
     private void RotateTowards(Vector2 target)
     {
