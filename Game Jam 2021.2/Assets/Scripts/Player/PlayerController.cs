@@ -2,21 +2,16 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
 public class PlayerController : MonoBehaviour
 {
+    private AudioManager audioManager;
     private GameObject[] enemy;
-    [Header("Sounds")]
-    [SerializeField] AudioSource jumpSound;
-    [SerializeField] AudioSource shootSound;
-    public AudioSource lasershootSound;
-    [SerializeField] AudioSource ammoaddSound;
-    [Space(1f)]
     private Rigidbody2D rb;
     private Animator am;
     private SpriteRenderer sp;
     public Button retryButton;
     public Slider slider;
+    public TextMeshProUGUI needkeyText;
     public TextMeshProUGUI scoreText;
     private Gravitygun gravitygun;
 
@@ -31,6 +26,7 @@ public class PlayerController : MonoBehaviour
     [Space(3f)]
     [SerializeField] private float moveSpeed;
 
+    [SerializeField] private float jumpingFactor;
     [SerializeField] private float jumpSpeed;
     [SerializeField] private float laddercheckDist;
     public int playerHP = 100;
@@ -43,6 +39,7 @@ public class PlayerController : MonoBehaviour
     public GameObject GravityGun;
     public GameObject EnergyGun;
     private Animator energyGun_am;
+    private Mousemechanism mouse;
     public bool canFire;
     public bool hasKey = false;
     private LayerMask whatisLadder;
@@ -53,7 +50,7 @@ public class PlayerController : MonoBehaviour
     private bool isSpace = false;
     private bool isMouse_0 = false;
 
-    private void Start()
+    private void Awake()
     {
         GetComponents();
     }
@@ -67,6 +64,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        Die();
         Jump();
         gravitygun.HitWithRay();
         GetInput();
@@ -75,13 +73,14 @@ public class PlayerController : MonoBehaviour
         Shoot();
         ChangeGuns();
         PlayAnimations();
-        Die();
         UpdateUI();
         AddBulletsOnEnemyDeath();
     }
-
     private void GetComponents()
     {
+        Cursor.visible = false;
+        mouse = FindObjectOfType<Mousemechanism>();
+        audioManager = FindObjectOfType<AudioManager>();
         enemy = GameObject.FindGameObjectsWithTag("Enemy");
         whatisLadder = LayerMask.GetMask("Ladder");
         energyGun_am = EnergyGun.GetComponent<Animator>();
@@ -124,7 +123,6 @@ public class PlayerController : MonoBehaviour
             EnergyGun.gameObject.SetActive(false);
         }
     }
-
     private void Shoot()
     {
         if (hasEneryGun == true)
@@ -151,7 +149,6 @@ public class PlayerController : MonoBehaviour
         if (groundInfo == true) isOnGround = true;
         else isOnGround = false;
     }
-
     private void Move()
     {
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
@@ -212,8 +209,8 @@ public class PlayerController : MonoBehaviour
 
     private void PlaySound()
     {
-        if(EnergyGun.gameObject.activeSelf == true)if(canFire == true) if (isMouse_0) shootSound.Play();
-        if(isOnGround == true) if (isSpace) jumpSound.Play();
+        if (EnergyGun.gameObject.activeSelf == true) if (canFire == true) if (isMouse_0) audioManager.PlaySound("playerShootE");
+        if (isOnGround == true) if (isSpace) audioManager.PlaySound("playerJump");
     }
 
     private void PlayAnimations()
@@ -226,10 +223,7 @@ public class PlayerController : MonoBehaviour
         {
             am.SetFloat("Speed", 2);
         }
-        else if (rb.velocity == Vector2.up)
-        {
-            am.SetTrigger("Jump");
-        }
+        if (isOnGround == true) if (isSpace) am.SetTrigger("Jump");
     }
 
     public void BulletDamage()
@@ -245,8 +239,9 @@ public class PlayerController : MonoBehaviour
 
     private void Die()
     {
-        if (playerHP == 0)
+        if (playerHP <= 0)
         {
+            audioManager.PlaySound("playerDeath");
             am.Play("Edward Death");
             Destroy(gameObject, 0.3f);
             ShowRetrybuttons();
@@ -264,7 +259,7 @@ public class PlayerController : MonoBehaviour
                 {
                     if (g.GetComponent<SuitGuyAI>().enemyHP == 0)
                     {
-                        ammoaddSound.Play();
+                        audioManager.PlaySound("playerAddAmmo");
                         bulletCount += 5;
                     }
                 }
@@ -272,7 +267,7 @@ public class PlayerController : MonoBehaviour
                 {
                     if (g.GetComponent<Patrol>().roboHp == 0)
                     {
-                        ammoaddSound.Play();
+                        audioManager.PlaySound("playerAddAmmo");
                         bulletCount += 10;
                     }
                 }
@@ -282,11 +277,12 @@ public class PlayerController : MonoBehaviour
 
     private void ShowRetrybuttons()
     {
+        Cursor.visible = true;
         retryButton.gameObject.SetActive(true);
     }
 
     public void RetryButton()
-    { 
+    {
         Scene presentScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(presentScene.name);
     }
@@ -295,5 +291,23 @@ public class PlayerController : MonoBehaviour
     {
         Gizmos.DrawRay(LadderCheck.position, Vector2.up);
         Gizmos.DrawWireSphere(groundCheckPoint.position, groundHitRadius);
+    }
+
+    private void OnCollisionExit2D(Collision2D col)
+    {
+        if (col.collider.GetComponent<Bullet>() != null)
+        {
+            if (col.collider.GetComponent<Bullet>() == true)
+            {
+                audioManager.PlaySound("playerHurt");
+            }
+        }
+        if (col.collider.GetComponent<Missile>() != null)
+        {
+            if (col.collider.GetComponent<Missile>() == true)
+            {
+                audioManager.PlaySound("playerHurt");
+            }
+        }
     }
 }

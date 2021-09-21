@@ -12,24 +12,24 @@ public class Bullet : MonoBehaviour
     {
         Physics2D.IgnoreCollision(bullet, robo);
     }
-    public void OnTriggerEnter2D(Collider2D col)
+    public void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.CompareTag("Player"))
+        if (col.collider.CompareTag("Player"))
         {
-            col.GetComponent<Animator>().Play("Edward Hurt");
-            col.GetComponent<PlayerController>().BulletDamage();
+            col.collider.GetComponent<Animator>().Play("Edward Hurt");
+            col.collider.GetComponent<PlayerController>().BulletDamage();
             Destroy(gameObject);
         }
-        else if (col.IsTouchingLayers(9))
+        else if (col.collider.IsTouchingLayers(9))
         {
             Destroy(gameObject);
         }      
     }
-    private void OnTriggerExit2D(Collider2D col)
+    private void OnCollisionExit2D(Collision2D col)
     {
-        if(col.CompareTag("Player"))
+        if(col.collider.CompareTag("Player"))
         {
-            col.GetComponent<Animator>().SetBool("Hurt", false);
+            col.collider.GetComponent<Animator>().SetBool("Hurt", false);
         }
     }
 }

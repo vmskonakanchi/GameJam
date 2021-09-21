@@ -8,7 +8,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <ProjectGuid>{0A7F4BF3-E446-0705-0B1D-F7D48FB53C14}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -70,6 +71,8 @@
     <Compile Include="Assets\Scripts\Suit Guy\SuitGuyAI_GC.cs" />
     <Compile Include="Assets\Scripts\Player\Mousemechanism.cs" />
     <Compile Include="Assets\Scripts\Camera\Camera_Follow.cs" />
+    <Compile Include="Assets\Scripts\Audio\Sound.cs" />
+    <Compile Include="Assets\Scripts\Audio\AudioManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

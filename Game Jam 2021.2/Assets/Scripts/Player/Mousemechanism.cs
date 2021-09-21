@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
+
 public class Mousemechanism : MonoBehaviour
 {
-    void Update()
+    private void Update()
     {
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 gunPos = transform.position;
@@ -9,6 +10,5 @@ public class Mousemechanism : MonoBehaviour
         transform.right = Direction;
         float angle = Mathf.Atan2(Direction.y, Direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0f, 0f, angle);
-
     }
 }

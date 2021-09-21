@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Missile : MonoBehaviour
 {
+    private AudioManager audiomanager;
     private SuitGuyAI enemy;
     public GameObject explosionFx;
     private GameObject player;
@@ -24,6 +25,7 @@ public class Missile : MonoBehaviour
 
     private void GetComponents()
     {
+        audiomanager = FindObjectOfType<AudioManager>();
         enemy = FindObjectOfType<SuitGuyAI>();
         player = GameObject.FindGameObjectWithTag("Player");
         if (player != null) playerPos = player.transform;
@@ -53,6 +55,7 @@ public class Missile : MonoBehaviour
             if (collision.collider.CompareTag("Player"))
             {
                 collision.collider.GetComponent<Animator>().Play("Edward Hurt");
+                audiomanager.PlaySound("missileExplode");
                 Destroy(gameObject);
                 playerController.playerHP -= missileDamage;
                 Explode();

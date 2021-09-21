@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Gravitygun : MonoBehaviour
 {
+    private AudioManager audioManager;
     private PlayerController player;
     [SerializeField] private float raycastDist;
     private RaycastHit2D hit2d;
@@ -10,8 +11,9 @@ public class Gravitygun : MonoBehaviour
     private Animator gravityGun_am;
     bool isMouse_1 = false;
 
-    private void Start()
+    private void Awake()
     {
+        audioManager = FindObjectOfType<AudioManager>();
         player = gameObject.GetComponent<PlayerController>();
         if (player != null) gravityGun_am = player.GravityGun.GetComponent<Animator>();
     }
@@ -27,7 +29,7 @@ public class Gravitygun : MonoBehaviour
 
         if (isMouse_1 && player.GravityGun.activeSelf == true)
         {
-            player.lasershootSound.Play();
+            audioManager.PlaySound("playerShootG");
             gravityGun_am.SetBool("shoot", true);
             player.hasgravityGun = true;
             hit2d = Physics2D.Raycast(player.playerbulletFirePoint.position, correctPos, raycastDist);

@@ -5,24 +5,22 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    [SerializeField]Transform optionScreen;
+    [SerializeField] Transform optionScreen;
     [SerializeField] Transform mainScreen;
 
     Transform currentScreen;
 
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         currentScreen = GetComponent<Transform>();
-    }
 
-    // Update is called once per frame
-    void Update()
+    }
+    private void Start() 
     {
-        
+        currentScreen.gameObject.GetComponent<Animator>().Play("SwipeIn");
     }
-
     public void Play()
     {
 
@@ -36,7 +34,8 @@ public class MainMenu : MonoBehaviour
     {
 
         //Open new Options Menu
-        OpenNewScreen(optionScreen);
+        CloseScreen(mainScreen);
+        OpenScreen(optionScreen,"SwipeIn");
 
     }
 
@@ -49,17 +48,13 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
     }
 
-    void OpenNewScreen(Transform screen)
+    public void OpenScreen(Transform screen, string Animation)
     {
-        currentScreen.GetComponent<Animator>().SetTrigger("SwipeOut");
-        screen.gameObject.SetActive(true);
-        
-    
-
+            screen.gameObject.SetActive(true);           
+            screen.gameObject.GetComponent<Animator>().Play(Animation);    
     }
-
-
-
-
-
+    private void CloseScreen(Transform screen)
+    {
+        screen.gameObject.SetActive(false);
+    }
 }

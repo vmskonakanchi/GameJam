@@ -8,12 +8,14 @@ public class Portal : MonoBehaviour
     SpriteRenderer sp1;
     PlayerController player;
 
+       
+    
     IEnumerator LoadScene()
     {
         yield return new WaitForSeconds(1f);
         SceneManager.LoadScene(2);
     }
-    private void Start()
+    private void Awake()
     {
         player = FindObjectOfType<PlayerController>();
         GameObject ParentgameObject = this.gameObject;
@@ -33,12 +35,15 @@ public class Portal : MonoBehaviour
                 sp.enabled = false;
                 am.enabled = true;
                 Debug.Log("Playing");
+                
             }
         }
         if (!player.hasKey)
         {
+            player.needkeyText.gameObject.SetActive(true);
+            StartCoroutine(ShowKeyText());
             Debug.Log("Need key To unlock the door");
-        }    
+        } 
     }
     private void OnTriggerExit2D(Collider2D collision)
     { 
@@ -61,6 +66,10 @@ public class Portal : MonoBehaviour
         }
         
     }
-
+    IEnumerator ShowKeyText()
+    {
+        yield return new WaitForSeconds(2f);
+        player.needkeyText.gameObject.SetActive(false);
+    }
 
 }
