@@ -8,6 +8,7 @@ TagManager:
   - RoboEnemy
   - Object
   - Puzzle
+  - PowerUp
   layers:
   - Default
   - TransparentFX

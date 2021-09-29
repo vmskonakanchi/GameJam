@@ -1,7 +1,9 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+
 public class PlayerController : MonoBehaviour
 {
     private AudioManager audioManager;
@@ -24,15 +26,19 @@ public class PlayerController : MonoBehaviour
     public Transform LadderCheck;
 
     [Space(3f)]
-    [SerializeField] private float moveSpeed;
+    public float moveSpeed = 6;
 
-    [SerializeField] private float jumpingFactor;
-    [SerializeField] private float jumpSpeed;
+    public float jumpSpeed = 8;
     [SerializeField] private float laddercheckDist;
+
+    [HideInInspector]
+    public int deservedAmmo = 10;
+
     public int playerHP = 100;
     public int bulletCount = 15;
     [SerializeField] public float launchForce;
     [SerializeField] private bool isOnGround;
+
     private float groundHitRadius = 0.08f;
     public bool hasgravityGun;
     public bool hasEneryGun = false;
@@ -76,6 +82,7 @@ public class PlayerController : MonoBehaviour
         UpdateUI();
         AddBulletsOnEnemyDeath();
     }
+
     private void GetComponents()
     {
         Cursor.visible = false;
@@ -123,6 +130,7 @@ public class PlayerController : MonoBehaviour
             EnergyGun.gameObject.SetActive(false);
         }
     }
+
     private void Shoot()
     {
         if (hasEneryGun == true)
@@ -149,6 +157,7 @@ public class PlayerController : MonoBehaviour
         if (groundInfo == true) isOnGround = true;
         else isOnGround = false;
     }
+
     private void Move()
     {
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
@@ -156,13 +165,14 @@ public class PlayerController : MonoBehaviour
         {
             rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
             am.SetFloat("Speed", 2);
-            sp.flipX = true;
+            transform.eulerAngles = new Vector3(0,180,0);
         }
         else if (isD == true)
         {
             rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
             sp.flipX = false;
             am.SetFloat("Speed", 2);
+            transform.eulerAngles = new Vector3(0,0,0);
         }
         else
         {
@@ -170,7 +180,6 @@ public class PlayerController : MonoBehaviour
             rb.velocity = new Vector2(0, rb.velocity.y);
         }
     }
-
     private void Jump()
     {
         if (isSpace && isOnGround == true)
@@ -209,7 +218,7 @@ public class PlayerController : MonoBehaviour
 
     private void PlaySound()
     {
-        if (EnergyGun.gameObject.activeSelf == true) if (canFire == true) if (isMouse_0) audioManager.PlaySound("playerShootE");
+        if (EnergyGun.gameObject.activeSelf) if (canFire == true) if (isMouse_0) audioManager.PlaySound("playerShootE");
         if (isOnGround == true) if (isSpace) audioManager.PlaySound("playerJump");
     }
 
@@ -260,7 +269,7 @@ public class PlayerController : MonoBehaviour
                     if (g.GetComponent<SuitGuyAI>().enemyHP == 0)
                     {
                         audioManager.PlaySound("playerAddAmmo");
-                        bulletCount += 5;
+                        bulletCount += deservedAmmo / 2;
                     }
                 }
                 if (g.GetComponent<Patrol>() != null)
@@ -268,7 +277,7 @@ public class PlayerController : MonoBehaviour
                     if (g.GetComponent<Patrol>().roboHp == 0)
                     {
                         audioManager.PlaySound("playerAddAmmo");
-                        bulletCount += 10;
+                        bulletCount += deservedAmmo;
                     }
                 }
             }

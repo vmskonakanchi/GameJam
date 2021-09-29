@@ -26,7 +26,6 @@ public class Gravitygun : MonoBehaviour
     {
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         correctPos = (mousePos - transform.position).normalized;
-
         if (isMouse_1 && player.GravityGun.activeSelf == true)
         {
             audioManager.PlaySound("playerShootG");

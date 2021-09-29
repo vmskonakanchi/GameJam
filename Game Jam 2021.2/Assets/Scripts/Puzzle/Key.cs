@@ -6,8 +6,8 @@ public class Key : MonoBehaviour
     {
         if (collision.collider.CompareTag("Player"))
         {
-            Destroy(gameObject);
             collision.collider.GetComponent<PlayerController>().hasKey = true;
+            Destroy(gameObject);
         }
     }
 }
