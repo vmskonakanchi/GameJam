@@ -252,7 +252,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   optionScreen: {fileID: 76226868}
   mainScreen: {fileID: 1498008778}
-  currentScreen: {fileID: 0}
 --- !u!95 &76226870
 Animator:
   serializedVersion: 3
@@ -429,6 +428,10 @@ PrefabInstance:
     - target: {fileID: 8326419928228170121, guid: f19258c20e2cbf843803d0427f7f71e0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8326419928228170126, guid: f19258c20e2cbf843803d0427f7f71e0, type: 3}
+      propertyPath: sounds.Array.data[8].volume
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 8326419928228170127, guid: f19258c20e2cbf843803d0427f7f71e0, type: 3}
       propertyPath: m_Name
@@ -2556,7 +2559,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   optionScreen: {fileID: 76226868}
   mainScreen: {fileID: 1771064357}
-  currentScreen: {fileID: 0}
 --- !u!95 &1771064359
 Animator:
   serializedVersion: 3

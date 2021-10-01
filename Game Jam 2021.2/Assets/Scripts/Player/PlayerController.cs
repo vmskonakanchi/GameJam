@@ -73,6 +73,8 @@ public class PlayerController : MonoBehaviour
         Die();
         Jump();
         gravitygun.HitWithRay();
+        gravitygun.DragObject();
+        gravitygun.StopObjectFrontOfPlayer();
         GetInput();
         PlaySound();
         CountAmmo();
@@ -93,7 +95,7 @@ public class PlayerController : MonoBehaviour
         energyGun_am = EnergyGun.GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         am = GetComponent<Animator>();
-        gravitygun = gameObject.GetComponent<Gravitygun>();
+        gravitygun = GetComponent<Gravitygun>();
         sp = GetComponent<SpriteRenderer>();
     }
 

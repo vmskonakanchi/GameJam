@@ -582,9 +582,9 @@ GameObject:
   - component: {fileID: 2153796886541566426}
   - component: {fileID: 6700662352759024508}
   - component: {fileID: 5734569137279635497}
-  - component: {fileID: 9219690763349572719}
   - component: {fileID: 916372751}
   - component: {fileID: 1233997447}
+  - component: {fileID: 925248361}
   m_Layer: 0
   m_Name: Edward
   m_TagString: Player
@@ -651,7 +651,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 11
   m_Sprite: {fileID: 21300000, guid: 24610e736d550f64c801db3530f4ce12, type: 3}
-  m_Color: {r: 0.98039216, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -723,7 +723,7 @@ MonoBehaviour:
   groundCheckPoint: {fileID: 4494743399226199849}
   LadderCheck: {fileID: 4112336684487086184}
   moveSpeed: 6
-  jumpSpeed: 8
+  jumpSpeed: 10
   laddercheckDist: 4
   deservedAmmo: 10
   playerHP: 100
@@ -736,19 +736,6 @@ MonoBehaviour:
   EnergyGun: {fileID: 2913298887083128359}
   canFire: 0
   hasKey: 0
---- !u!114 &9219690763349572719
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4693272314958759036}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0c9ca2c01b0fd14f9ae44f9af74435c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  raycastDist: 10
 --- !u!70 &916372751
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -778,10 +765,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedpickup: {fileID: 2764769083117852308, guid: 715556c24d983ae43b42153a09ea0cc2, type: 3}
-  jumppickup: {fileID: 0}
+  jumppickup: {fileID: 4175455421368531716, guid: 8745e7af9b29e2f498ba5cfc1399a061, type: 3}
   shootpickup: {fileID: 4553187259346963817, guid: b43f77d46802c684ca0e5860be636d0f, type: 3}
   powerinfluencer: 10
   Timer: 4
+--- !u!114 &925248361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4693272314958759036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0c9ca2c01b0fd14f9ae44f9af74435c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  raycastDist: 10
+  dragDist: 10
+  dragSpeed: 2
+  stopradius: 0.5
+  hitSpeed: 2500
 --- !u!1 &5810591331236577785
 GameObject:
   m_ObjectHideFlags: 0
@@ -1158,6 +1162,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   raycastDist: 10
+  dragDist: 0
+  dragSpeed: 0
+  stopradius: 0
+  hitSpeed: 0
 --- !u!95 &1766459903
 Animator:
   serializedVersion: 3

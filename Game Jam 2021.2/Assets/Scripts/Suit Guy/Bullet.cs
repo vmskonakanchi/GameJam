@@ -6,10 +6,11 @@ public class Bullet : MonoBehaviour
     private void Start()
     {
         bullet = this.GetComponent<Collider2D>();
-        robo = FindObjectOfType<Patrol>().GetComponent<Collider2D>();
+        if(GameObject.FindGameObjectWithTag("Enemy").GetComponent<Patrol>() != null)robo = FindObjectOfType<Patrol>().GetComponent<Collider2D>();
     }
     private void FixedUpdate()
     {
+        if(!robo||!bullet) return;
         Physics2D.IgnoreCollision(bullet, robo);
     }
     public void OnCollisionEnter2D(Collision2D col)

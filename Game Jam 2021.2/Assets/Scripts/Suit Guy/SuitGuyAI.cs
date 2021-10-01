@@ -21,6 +21,7 @@ public class SuitGuyAI : MonoBehaviour
     [SerializeField] private GameObject bullet;
     [SerializeField] private GameObject muzzleFlash;
     [SerializeField] private bool startFacingLeft;
+    [SerializeField] private int damageMultiplier;
 
     public Vector2 chase_Range;
     public Vector2 shooting_Range;
@@ -265,5 +266,14 @@ public class SuitGuyAI : MonoBehaviour
         isShooting = false;
         yield return new WaitForSeconds(shootingInterval - 0.36f);
         canShoot = true;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Object")
+        {
+            Rigidbody2D rbb = collision.gameObject.GetComponent<Rigidbody2D>();
+            enemyHP -= Mathf.RoundToInt(rbb.mass) * damageMultiplier;
+        }
     }
 }
