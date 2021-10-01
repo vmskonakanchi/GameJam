@@ -29,6 +29,7 @@ public class Patrol : MonoBehaviour
     private Rigidbody2D rb;
     private Animator anim;
     private Slider slider;
+    [SerializeField] int damageMultiplier = 5;
     private void Start()
     {
         slider = gameObject.GetComponentInChildren<Slider>();
@@ -147,5 +148,13 @@ public class Patrol : MonoBehaviour
     public void Damage()
     {
         roboHp -= 12.5f;
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Object")
+        {
+            Rigidbody2D rbb = collision.gameObject.GetComponent<Rigidbody2D>();
+            roboHp -= Mathf.RoundToInt(rbb.mass) * damageMultiplier;
+        }
     }
 }
