@@ -1,9 +1,7 @@
-using System;
-using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
+using TMPro;
 public class PlayerController : MonoBehaviour
 {
     private AudioManager audioManager;
@@ -16,32 +14,26 @@ public class PlayerController : MonoBehaviour
     public TextMeshProUGUI needkeyText;
     public TextMeshProUGUI scoreText;
     private Gravitygun gravitygun;
-
     [Header("Components Required")]
     public GameObject bulletPrefab;
-
     public GameObject muzzleFlsh;
     public Transform playerbulletFirePoint;
     public Transform groundCheckPoint;
     public Transform LadderCheck;
-
     [Space(3f)]
     public float moveSpeed = 6;
-
     public float jumpSpeed = 8;
     [SerializeField] private float laddercheckDist;
-
     [HideInInspector]
     public int deservedAmmo = 10;
-
     public int playerHP = 100;
     public int bulletCount = 15;
     [SerializeField] public float launchForce;
     [SerializeField] private bool isOnGround;
-
     private float groundHitRadius = 0.08f;
     public bool hasgravityGun;
     public bool hasEneryGun = false;
+    public Transform WeaponHolder;
     public GameObject GravityGun;
     public GameObject EnergyGun;
     private Animator energyGun_am;
@@ -49,25 +41,21 @@ public class PlayerController : MonoBehaviour
     public bool canFire;
     public bool hasKey = false;
     private LayerMask whatisLadder;
-
     private bool isA = false;
     private bool isD = false;
     private bool isW = false;
     private bool isSpace = false;
     private bool isMouse_0 = false;
-
     private void Awake()
     {
         GetComponents();
     }
-
     private void FixedUpdate()
     {
         ClimbLadders();
         Move();
         CheckGround();
     }
-
     private void Update()
     {
         Die();
@@ -84,7 +72,21 @@ public class PlayerController : MonoBehaviour
         UpdateUI();
         AddBulletsOnEnemyDeath();
     }
-
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawRay(LadderCheck.position, Vector2.up);
+        Gizmos.DrawWireSphere(groundCheckPoint.position, groundHitRadius);
+    }
+    private void OnCollisionExit2D(Collision2D col)
+    {
+        if (col.collider.GetComponent<Bullet>() != null || col.collider.GetComponent<Missile>() != null)
+        {
+            if (col.collider.GetComponent<Bullet>() == true || col.collider.GetComponent<Missile>() == true)
+            {
+                audioManager.PlaySound("playerHurt");
+            }
+        }
+    }
     private void GetComponents()
     {
         Cursor.visible = false;
@@ -98,7 +100,6 @@ public class PlayerController : MonoBehaviour
         gravitygun = GetComponent<Gravitygun>();
         sp = GetComponent<SpriteRenderer>();
     }
-
     private void GetInput()
     {
         isA = Input.GetKey(KeyCode.A);
@@ -107,7 +108,6 @@ public class PlayerController : MonoBehaviour
         isSpace = Input.GetKeyDown(KeyCode.Space);
         isMouse_0 = Input.GetMouseButtonDown(0);
     }
-
     private void ChangeGuns()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -132,7 +132,6 @@ public class PlayerController : MonoBehaviour
             EnergyGun.gameObject.SetActive(false);
         }
     }
-
     private void Shoot()
     {
         if (hasEneryGun == true)
@@ -152,14 +151,12 @@ public class PlayerController : MonoBehaviour
             else energyGun_am.SetBool("shoot", false);
         }
     }
-
     private void CheckGround()
     {
         Collider2D groundInfo = Physics2D.OverlapCircle(groundCheckPoint.position, groundHitRadius);
         if (groundInfo == true) isOnGround = true;
         else isOnGround = false;
     }
-
     private void Move()
     {
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
@@ -167,14 +164,14 @@ public class PlayerController : MonoBehaviour
         {
             rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
             am.SetFloat("Speed", 2);
-            transform.eulerAngles = new Vector3(0,180,0);
+            transform.eulerAngles = new Vector3(0, 180, 0);
         }
         else if (isD == true)
         {
             rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
             sp.flipX = false;
             am.SetFloat("Speed", 2);
-            transform.eulerAngles = new Vector3(0,0,0);
+            transform.eulerAngles = new Vector3(0, 0, 0);
         }
         else
         {
@@ -191,7 +188,6 @@ public class PlayerController : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
         }
     }
-
     private void ClimbLadders()
     {
         RaycastHit2D ladderHit = Physics2D.Raycast(LadderCheck.position, Vector2.up, laddercheckDist, whatisLadder);
@@ -208,7 +204,6 @@ public class PlayerController : MonoBehaviour
             rb.gravityScale = 1;
         }
     }
-
     private void CountAmmo()
     {
         if (bulletCount > 0)
@@ -217,13 +212,11 @@ public class PlayerController : MonoBehaviour
         }
         else if (bulletCount == 0) canFire = false;
     }
-
     private void PlaySound()
     {
         if (EnergyGun.gameObject.activeSelf) if (canFire == true) if (isMouse_0) audioManager.PlaySound("playerShootE");
         if (isOnGround == true) if (isSpace) audioManager.PlaySound("playerJump");
     }
-
     private void PlayAnimations()
     {
         if (rb.velocity == Vector2.zero)
@@ -236,18 +229,15 @@ public class PlayerController : MonoBehaviour
         }
         if (isOnGround == true) if (isSpace) am.SetTrigger("Jump");
     }
-
     public void BulletDamage()
     {
         playerHP -= 5;
     }
-
     private void UpdateUI()
     {
         scoreText.text = bulletCount.ToString();
         slider.value = playerHP;
     }
-
     private void Die()
     {
         if (playerHP <= 0)
@@ -258,7 +248,6 @@ public class PlayerController : MonoBehaviour
             ShowRetrybuttons();
         }
     }
-
     private void AddBulletsOnEnemyDeath()
     {
         if (enemy == null) return;
@@ -285,40 +274,14 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-
     private void ShowRetrybuttons()
     {
         Cursor.visible = true;
         retryButton.gameObject.SetActive(true);
     }
-
     public void RetryButton()
     {
         Scene presentScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(presentScene.name);
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.DrawRay(LadderCheck.position, Vector2.up);
-        Gizmos.DrawWireSphere(groundCheckPoint.position, groundHitRadius);
-    }
-
-    private void OnCollisionExit2D(Collision2D col)
-    {
-        if (col.collider.GetComponent<Bullet>() != null)
-        {
-            if (col.collider.GetComponent<Bullet>() == true)
-            {
-                audioManager.PlaySound("playerHurt");
-            }
-        }
-        if (col.collider.GetComponent<Missile>() != null)
-        {
-            if (col.collider.GetComponent<Missile>() == true)
-            {
-                audioManager.PlaySound("playerHurt");
-            }
-        }
     }
 }

@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637685732503105786
-    m_Hash: 3435408613
+      ticks: 637687050574697661
+    m_Hash: 3732808416
   m_LockFileStatus:
     m_FilePath: C:/Users/vmsko/OneDrive/Documents/GitHub/GameJam/Game Jam 2021.2/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637685732503281808
-    m_Hash: 3205596547
+      ticks: 637687050574770532
+    m_Hash: 2086790881
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_PackageAssets:
@@ -575,6 +575,119 @@ m_PackageAssets:
         type: git
         url: https://github.cds.internal.unity3d.com/unity/com.unity.cloud.collaborate.git
         revision: f079d307344f568804d3ea6d781013135e614e45
+        path: 
+    - packageId: com.unity.connect.share@4.2.2
+      testable: 0
+      isDirectDependency: 1
+      version: 4.2.2
+      source: 1
+      resolvedPath: C:\Users\vmsko\OneDrive\Documents\GitHub\GameJam\Game Jam 2021.2\Library\PackageCache\com.unity.connect.share@4.2.2
+      assetPath: Packages/com.unity.connect.share
+      name: com.unity.connect.share
+      displayName: WebGL Publisher
+      author:
+        name: 
+        email: 
+        url: 
+      category: 
+      type: 
+      description: This tool allows you to make a WebGL build of your current project
+        and upload it to Unity's website, where it can be shared with others.
+      status: 4
+      errors: []
+      versions:
+        all:
+        - 1.0.0-preview
+        - 1.0.1-preview
+        - 1.0.2-preview
+        - 1.0.3-preview
+        - 1.0.4-preview
+        - 1.0.5-preview
+        - 1.0.6-preview.2
+        - 1.0.7-preview
+        - 1.0.8-preview
+        - 1.0.9-preview
+        - 1.0.10-preview
+        - 1.1.0-preview.1
+        - 1.2.0-preview.1
+        - 2.0.1-preview
+        - 2.0.2-preview.3
+        - 2.0.2-preview.4
+        - 2.0.3
+        - 2.0.5
+        - 2.0.6
+        - 2.1.0
+        - 3.0.0
+        - 4.0.1
+        - 4.0.2
+        - 4.0.3
+        - 4.1.0
+        - 4.1.1
+        - 4.2.1
+        - 4.2.2
+        compatible:
+        - 1.0.0-preview
+        - 1.0.1-preview
+        - 1.0.2-preview
+        - 1.0.3-preview
+        - 1.0.4-preview
+        - 1.0.5-preview
+        - 1.0.6-preview.2
+        - 1.0.7-preview
+        - 1.0.8-preview
+        - 1.0.9-preview
+        - 1.0.10-preview
+        - 1.1.0-preview.1
+        - 1.2.0-preview.1
+        - 2.0.1-preview
+        - 2.0.2-preview.3
+        - 2.0.2-preview.4
+        - 2.0.3
+        - 2.0.5
+        - 2.0.6
+        - 2.1.0
+        - 3.0.0
+        - 4.0.1
+        - 4.0.2
+        - 4.0.3
+        - 4.1.0
+        - 4.1.1
+        - 4.2.1
+        - 4.2.2
+        verified: 
+      dependencies:
+      - name: com.unity.editorcoroutines
+        version: 1.0.0
+      - name: com.unity.settings-manager
+        version: 1.0.2
+      resolvedDependencies:
+      - name: com.unity.editorcoroutines
+        version: 1.0.0
+      - name: com.unity.settings-manager
+        version: 1.0.2
+      keywords:
+      - webgl
+      - share
+      - connect
+      registry:
+        id: main
+        name: 
+        url: https://packages.unity.com
+        scopes: []
+        isDefault: 1
+        capabilities: 7
+      hasRegistry: 1
+      hideInEditor: 1
+      entitlements:
+        isAllowed: 1
+      isAssetStorePackage: 0
+      datePublishedTicks: 637528944360000000
+      documentationUrl: 
+      hasRepository: 1
+      repository:
+        type: git
+        url: https://github.cds.internal.unity3d.com/unity/com.unity.connect.share.git
+        revision: e74c365a80ad2496b1a07f69075a8963a41a6f88
         path: 
     - packageId: com.unity.ide.rider@2.0.7
       testable: 0
@@ -3109,6 +3222,128 @@ m_PackageAssets:
         type: git
         url: https://github.cds.internal.unity3d.com/unity/com.unity.ext.nunit.git
         revision: 29ea4d6504a5f58fb3a6934db839aa80ae6d9d88
+        path: 
+    - packageId: com.unity.editorcoroutines@1.0.0
+      testable: 0
+      isDirectDependency: 0
+      version: 1.0.0
+      source: 1
+      resolvedPath: C:\Users\vmsko\OneDrive\Documents\GitHub\GameJam\Game Jam 2021.2\Library\PackageCache\com.unity.editorcoroutines@1.0.0
+      assetPath: Packages/com.unity.editorcoroutines
+      name: com.unity.editorcoroutines
+      displayName: Editor Coroutines
+      author:
+        name: 
+        email: 
+        url: 
+      category: 
+      type: 
+      description: 'The editor coroutines package allows developers to start constructs
+        similar to Unity''s monobehaviour based coroutines within the editor using
+        abitrary objects. '
+      status: 4
+      errors: []
+      versions:
+        all:
+        - 0.0.1-preview.3
+        - 0.0.1-preview.4
+        - 0.0.1-preview.5
+        - 0.0.2-preview.1
+        - 0.1.0-preview.1
+        - 0.1.0-preview.2
+        - 1.0.0
+        compatible:
+        - 0.0.1-preview.3
+        - 0.0.1-preview.4
+        - 0.0.1-preview.5
+        - 0.0.2-preview.1
+        - 0.1.0-preview.1
+        - 0.1.0-preview.2
+        - 1.0.0
+        verified: 1.0.0
+      dependencies: []
+      resolvedDependencies: []
+      keywords:
+      - coroutine
+      - coroutines
+      - editor
+      registry:
+        id: main
+        name: 
+        url: https://packages.unity.com
+        scopes: []
+        isDefault: 1
+        capabilities: 7
+      hasRegistry: 1
+      hideInEditor: 1
+      entitlements:
+        isAllowed: 1
+      isAssetStorePackage: 0
+      datePublishedTicks: 637232611380000000
+      documentationUrl: 
+      hasRepository: 1
+      repository:
+        type: git
+        url: https://github.cds.internal.unity3d.com/unity/com.unity.editorcoroutines.git
+        revision: f67fc9992bbc7a553b17375de53a8b2db136528e
+        path: 
+    - packageId: com.unity.settings-manager@1.0.2
+      testable: 0
+      isDirectDependency: 0
+      version: 1.0.2
+      source: 1
+      resolvedPath: C:\Users\vmsko\OneDrive\Documents\GitHub\GameJam\Game Jam 2021.2\Library\PackageCache\com.unity.settings-manager@1.0.2
+      assetPath: Packages/com.unity.settings-manager
+      name: com.unity.settings-manager
+      displayName: Settings Manager
+      author:
+        name: 
+        email: 
+        url: 
+      category: 
+      type: 
+      description: A framework for making any serializable field a setting, complete
+        with a pre-built settings interface.
+      status: 4
+      errors: []
+      versions:
+        all:
+        - 0.1.0-preview.4
+        - 0.1.0-preview.8
+        - 1.0.0
+        - 1.0.1
+        - 1.0.2
+        - 1.0.3
+        compatible:
+        - 0.1.0-preview.4
+        - 0.1.0-preview.8
+        - 1.0.0
+        - 1.0.1
+        - 1.0.2
+        - 1.0.3
+        verified: 1.0.3
+      dependencies: []
+      resolvedDependencies: []
+      keywords: []
+      registry:
+        id: main
+        name: 
+        url: https://packages.unity.com
+        scopes: []
+        isDefault: 1
+        capabilities: 7
+      hasRegistry: 1
+      hideInEditor: 1
+      entitlements:
+        isAllowed: 1
+      isAssetStorePackage: 0
+      datePublishedTicks: 637187671360000000
+      documentationUrl: 
+      hasRepository: 1
+      repository:
+        type: git
+        url: git+https://github.com/Unity-Technologies/com.unity.settings-manager.git
+        revision: e8eedc87ca7850bac0f7b2257db4edb8c300a0f3
         path: 
     - packageId: com.unity.nuget.newtonsoft-json@2.0.0
       testable: 0

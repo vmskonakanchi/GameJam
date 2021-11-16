@@ -1,5 +1,9 @@
 sceneSetups:
-- path: Assets/Scenes/MainMenu.unity
+- path: Assets/Scenes/Level 1.unity
+  isLoaded: 0
+  isActive: 0
+  isSubScene: 0
+- path: Assets/Procedural Generation/Procedural.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
