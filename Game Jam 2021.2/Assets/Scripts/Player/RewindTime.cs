@@ -2,46 +2,38 @@
 using UnityEngine;
 public class RewindTime : MonoBehaviour
 {
-    List <Vector2> position;
-    List <Quaternion> rotation;
-
-
-
+    List<Vector2> position;
+    List<Quaternion> rotation;
     void Start()
     {
-            position = new List<Vector2>();
-            rotation = new List<Quaternion>();
+        position = new List<Vector2>();
+        rotation = new List<Quaternion>();
     }
-
-      
-     void Update()
+    void Update()
     {
-      
-            RecordTime();
-      
+        RecordTime();
         if (Input.GetKey(KeyCode.Tab))
         {
             Rewindtime();
         }
     }
-
     private void RecordTime()
     {
         position.Insert(0, transform.position);
         rotation.Insert(0, transform.rotation);
-       // if (position.Count > Mathf.RoundToInt(5f / Time.fixedDeltaTime))
-       //{
-       //     position.RemoveAt(position.Count - 1);
-       //}
-       // else if (rotation.Count > Mathf.RoundToInt(5f / Time.fixedDeltaTime))
-       //{
-       //     rotation.RemoveAt(rotation.Count - 1);
-       // }     
-        if(position.Count > 0)
+        // if (position.Count > Mathf.RoundToInt(5f / Time.fixedDeltaTime))
+        //{
+        //     position.RemoveAt(position.Count - 1);
+        //}
+        // else if (rotation.Count > Mathf.RoundToInt(5f / Time.fixedDeltaTime))
+        //{
+        //     rotation.RemoveAt(rotation.Count - 1);
+        // }     
+        if (position.Count > 0)
         {
             Debug.Log("recording Positons");
         }
-   }
+    }
     void Rewindtime()
     {
         if (position.Count > 0)
@@ -49,7 +41,7 @@ public class RewindTime : MonoBehaviour
             transform.position = position[0];
             position.RemoveAt(0);
         }
-        else if(position.Count == 0)
+        else if (position.Count == 0)
         {
             Debug.Log("Not Recording positions");
         }
@@ -58,10 +50,5 @@ public class RewindTime : MonoBehaviour
             transform.rotation = rotation[0];
             rotation.RemoveAt(0);
         }
-    } 
+    }
 }
-
-
- 
-
-

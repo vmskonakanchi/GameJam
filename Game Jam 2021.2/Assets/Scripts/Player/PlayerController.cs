@@ -71,6 +71,7 @@ public class PlayerController : MonoBehaviour
         PlayAnimations();
         UpdateUI();
         AddBulletsOnEnemyDeath();
+        ROtateGuns();
     }
     private void OnDrawGizmosSelected()
     {
@@ -157,16 +158,29 @@ public class PlayerController : MonoBehaviour
         if (groundInfo == true) isOnGround = true;
         else isOnGround = false;
     }
+    private void ROtateGuns()
+    {
+        if (WeaponHolder.eulerAngles.z < 90f && WeaponHolder.eulerAngles.z > -90f)
+        {
+            GravityGun.transform.localEulerAngles = new Vector3(0f, 0f, 0f);
+            EnergyGun.transform.localEulerAngles = new Vector3(0f, 0f, 0f);
+        }
+        if (WeaponHolder.eulerAngles.z > 90f && WeaponHolder.eulerAngles.z > 0f)
+        {
+            GravityGun.transform.localEulerAngles = new Vector3(180f, 0f, 0f);
+            EnergyGun.transform.localEulerAngles = new Vector3(180f, 0f, 0f);
+        }
+    }
     private void Move()
     {
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-        if (isA == true)
+        if (isA)
         {
             rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
             am.SetFloat("Speed", 2);
             transform.eulerAngles = new Vector3(0, 180, 0);
         }
-        else if (isD == true)
+        else if (isD)
         {
             rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
             sp.flipX = false;
@@ -181,7 +195,7 @@ public class PlayerController : MonoBehaviour
     }
     private void Jump()
     {
-        if (isSpace && isOnGround == true)
+        if (isSpace && isOnGround)
         {
             isSpace = false;
             isOnGround = false;
@@ -191,9 +205,9 @@ public class PlayerController : MonoBehaviour
     private void ClimbLadders()
     {
         RaycastHit2D ladderHit = Physics2D.Raycast(LadderCheck.position, Vector2.up, laddercheckDist, whatisLadder);
-        if (ladderHit.collider == true)
+        if (ladderHit.collider)
         {
-            if (isW == true)
+            if (isW)
             {
                 rb.gravityScale = 0;
                 rb.velocity = new Vector2(0, moveSpeed);
@@ -214,8 +228,8 @@ public class PlayerController : MonoBehaviour
     }
     private void PlaySound()
     {
-        if (EnergyGun.gameObject.activeSelf) if (canFire == true) if (isMouse_0) audioManager.PlaySound("playerShootE");
-        if (isOnGround == true) if (isSpace) audioManager.PlaySound("playerJump");
+        if (EnergyGun.gameObject.activeSelf) if (canFire) if (isMouse_0) audioManager.PlaySound("playerShootE");
+        if (isOnGround) if (isSpace) audioManager.PlaySound("playerJump");
     }
     private void PlayAnimations()
     {
@@ -227,7 +241,7 @@ public class PlayerController : MonoBehaviour
         {
             am.SetFloat("Speed", 2);
         }
-        if (isOnGround == true) if (isSpace) am.SetTrigger("Jump");
+        if (isOnGround) if (isSpace) am.SetTrigger("Jump");
     }
     public void BulletDamage()
     {

@@ -9,6 +9,8 @@ TagManager:
   - Object
   - Puzzle
   - PowerUp
+  - Ground
+  - Target
   layers:
   - Default
   - TransparentFX
